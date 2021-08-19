@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class kontroler 
 {
+
+    /*@GetMapping("/")
+    public String home()
+    {
+        return "index";
+    }*/
+
     @GetMapping("/vukasinovic21")
     public String vukasinovic()
     {
