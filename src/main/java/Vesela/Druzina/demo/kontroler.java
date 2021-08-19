@@ -19,4 +19,17 @@ public class kontroler
     {
         return "Follow @dusan_markovic7";
     }
+
+    @GetMapping("/matrif")
+    public String matrif()
+    {
+        return "Pickica";
+    }
+
+    @GetMapping("/kole")
+    public String kole()
+    {
+        return "Pickica";
+    }
+
 }
