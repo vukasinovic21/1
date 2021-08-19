@@ -13,4 +13,10 @@ public class kontroler
     {
         return "Follow @vukasinovic21";
     }
+
+    @GetMapping("/dule")
+    public String dule()
+    {
+        return "Follow @dusan_markovic7";
+    }
 }
