@@ -1,0 +1,140 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 20, 2021 at 05:59 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `tim23`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `korisnik`
+--
+
+CREATE TABLE `korisnik` (
+  `ID` int(50) NOT NULL,
+  `Ime` varchar(50) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Username` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `MestoID` int(50) DEFAULT NULL,
+  `Mobilni` int(50) NOT NULL,
+  `Poslodavac` tinyint(1) NOT NULL,
+  `Admin` tinyint(1) NOT NULL,
+  `oSebi` text NOT NULL,
+  `BrojTelefona` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mesto`
+--
+
+CREATE TABLE `mesto` (
+  `MestoID` int(50) NOT NULL,
+  `Naziv` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oglas`
+--
+
+CREATE TABLE `oglas` (
+  `IDOglasa` int(50) NOT NULL,
+  `IDKorisnika` int(50) NOT NULL,
+  `Naziv` varchar(50) NOT NULL,
+  `Tip` tinyint(4) NOT NULL,
+  `Plata` int(11) NOT NULL,
+  `Opis` varchar(500) NOT NULL,
+  `Mesto` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prijave`
+--
+
+CREATE TABLE `prijave` (
+  `IDKorisnika` int(50) NOT NULL,
+  `IDOglasa` int(50) NOT NULL,
+  `OpisPrijave` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `korisnik`
+--
+ALTER TABLE `korisnik`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MestoID` (`MestoID`);
+
+--
+-- Indexes for table `mesto`
+--
+ALTER TABLE `mesto`
+  ADD PRIMARY KEY (`MestoID`);
+
+--
+-- Indexes for table `oglas`
+--
+ALTER TABLE `oglas`
+  ADD PRIMARY KEY (`IDOglasa`),
+  ADD KEY `IDKorisnika` (`IDKorisnika`);
+
+--
+-- Indexes for table `prijave`
+--
+ALTER TABLE `prijave`
+  ADD PRIMARY KEY (`IDKorisnika`,`IDOglasa`),
+  ADD KEY `IDOglasa` (`IDOglasa`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `korisnik`
+--
+ALTER TABLE `korisnik`
+  ADD CONSTRAINT `korisnik_ibfk_1` FOREIGN KEY (`MestoID`) REFERENCES `mesto` (`MestoID`);
+
+--
+-- Constraints for table `oglas`
+--
+ALTER TABLE `oglas`
+  ADD CONSTRAINT `oglas_ibfk_1` FOREIGN KEY (`IDKorisnika`) REFERENCES `korisnik` (`ID`);
+
+--
+-- Constraints for table `prijave`
+--
+ALTER TABLE `prijave`
+  ADD CONSTRAINT `prijave_ibfk_2` FOREIGN KEY (`IDOglasa`) REFERENCES `oglas` (`IDOglasa`),
+  ADD CONSTRAINT `prijave_ibfk_3` FOREIGN KEY (`IDKorisnika`) REFERENCES `korisnik` (`ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

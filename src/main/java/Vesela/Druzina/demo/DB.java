@@ -22,6 +22,7 @@ public class DB
             throwables.printStackTrace();
         }
     }
+    
     /*
     public void dodajUBazu(String sql, String increment)
     {
