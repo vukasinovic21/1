@@ -7,7 +7,8 @@ public class DB
 {
     private Connection conn = null;
     private Statement stmt = null;
-
+    String sql = null;
+    
     public DB()
     {
         try 
