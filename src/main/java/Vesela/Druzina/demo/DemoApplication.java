@@ -10,7 +10,6 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 		//dule dudule gace mu se nadule jel radi sad
 		//20.08.2021. Kole se ukljucuje u rad
-		// Kole se iskljucuje
 	}
 
 }

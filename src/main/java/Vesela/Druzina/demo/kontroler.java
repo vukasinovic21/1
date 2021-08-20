@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 public class kontroler 
 {
-    //DB b = new DB();
+    DB b = new DB();
     /*@GetMapping("/")
     public String home()
     {

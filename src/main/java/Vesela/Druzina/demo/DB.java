@@ -1,3 +1,4 @@
+package Vesela.Druzina.demo;
 
 
 import java.sql.*;
@@ -12,7 +13,7 @@ public class DB
         try 
         {
             System.out.println("Connecting...");
-            conn = DriverManager.getConnection("jdbc:mariadb://localhost/studije","root", "");
+            conn = DriverManager.getConnection("jdbc:mariadb://localhost/tim23","root", "");
             stmt = conn.createStatement();
             System.out.println("Connected");
         }
@@ -21,6 +22,7 @@ public class DB
             throwables.printStackTrace();
         }
     }
+    /*
     public void dodajUBazu(String sql, String increment)
     {
         try 
@@ -34,7 +36,7 @@ public class DB
         {
             throwables.printStackTrace();
         }
-    }
+    }*/
     /*
     // Izvrsava SQL naredbu i vraca rs(ResultSet)
     public ResultSet izvrsiSQL(String sql)
