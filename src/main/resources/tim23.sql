@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2021 at 07:57 PM
+-- Generation Time: Aug 26, 2021 at 06:07 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `korisnik` (
-  `ID` int(50) NOT NULL,
+  `ID` int(11) NOT NULL,
   `Ime` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Username` varchar(50) NOT NULL,
@@ -130,7 +130,17 @@ ALTER TABLE `oglas`
 --
 ALTER TABLE `prijave`
   ADD PRIMARY KEY (`IDKorisnika`,`IDOglasa`),
-  ADD KEY `IDOglasa` (`IDOglasa`);
+  ADD KEY `IDOglasa` (`IDOglasa`,`IDKorisnika`) USING BTREE;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `korisnik`
+--
+ALTER TABLE `korisnik`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -152,8 +162,10 @@ ALTER TABLE `oglas`
 -- Constraints for table `prijave`
 --
 ALTER TABLE `prijave`
+  ADD CONSTRAINT `prijave_ibfk_1` FOREIGN KEY (`IDOglasa`) REFERENCES `oglas` (`IDOglasa`),
   ADD CONSTRAINT `prijave_ibfk_2` FOREIGN KEY (`IDOglasa`) REFERENCES `oglas` (`IDOglasa`),
-  ADD CONSTRAINT `prijave_ibfk_3` FOREIGN KEY (`IDKorisnika`) REFERENCES `korisnik` (`ID`);
+  ADD CONSTRAINT `prijave_ibfk_3` FOREIGN KEY (`IDKorisnika`) REFERENCES `korisnik` (`ID`),
+  ADD CONSTRAINT `prijave_ibfk_4` FOREIGN KEY (`IDKorisnika`) REFERENCES `korisnik` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
