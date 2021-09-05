@@ -1,12 +1,12 @@
 package Vesela.Druzina.demo.model;
 
-public class mesto
+public class Mesto
 {
-    int mestoid;
-    String naziv;
+    private int mestoid;
+    private String naziv;
 
 
-    public mesto(int mestoid, String naziv)
+    public Mesto(int mestoid, String naziv)
     {
         this.mestoid = mestoid;
         this.naziv = naziv;

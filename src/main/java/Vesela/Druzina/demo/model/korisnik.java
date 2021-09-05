@@ -1,22 +1,25 @@
 package Vesela.Druzina.demo.model;
 
-public class korisnik 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
+public class Korisnik 
 {
-       int id;
-       String ime;
-       String email;
-       String username;
-       String password;
-       int mestoid;
-       int mobilni;
-       int poslodavac;
-       int admin;
-       String osebi;
+       private @Id @GeneratedValue int id;
+       private String ime;
+       private String email;
+       private String username;
+       private String password;
+       private int mestoid;
+       private int mobilni;
+       private int poslodavac;
+       private int admin;
+       private String osebi;
 
 
-    public korisnik(int id, String ime, String email, String username, String password, int mestoid, int mobilni, int poslodavac, int admin, String osebi) 
+    public Korisnik(String ime, String email, String username, String password, int mestoid, int mobilni, int poslodavac, int admin, String osebi) 
     {
-        this.id = id;
         this.ime = ime;
         this.email = email;
         this.username = username;
@@ -32,11 +35,6 @@ public class korisnik
     public int getId()
     {
         return this.id;
-    }
-
-    public void setId(int id) 
-    {
-        this.id = id;
     }
 
     public String getIme() 

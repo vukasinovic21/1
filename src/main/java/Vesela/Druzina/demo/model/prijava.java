@@ -1,13 +1,13 @@
 package Vesela.Druzina.demo.model;
 
-public class prijava 
+public class Prijava 
 {
-    int idkorisnika;
-    int idoglasa;
-    String opisPrijave;
+    private int idkorisnika;
+    private int idoglasa;
+    private String opisPrijave;
 
 
-    public prijava(int idkorisnika, int idoglasa, String opisPrijave)
+    public Prijava(int idkorisnika, int idoglasa, String opisPrijave)
     {
         this.idkorisnika = idkorisnika;
         this.idoglasa = idoglasa;

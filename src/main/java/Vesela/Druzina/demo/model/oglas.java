@@ -1,17 +1,17 @@
 package Vesela.Druzina.demo.model;
 
-public class oglas
+public class Oglas
 {
-    int idoglasa;
-    int idkorisnika;
-    String naziv;
-    int tip;
-    int plata;
-    String opis;
-    int mesto;
+    private int idoglasa;
+    private int idkorisnika;
+    private String naziv;
+    private int tip;
+    private int plata;
+    private String opis;
+    private int mesto;
 
 
-    public oglas(int idoglasa, int idkorisnika, String naziv, int tip, int plata, String opis, int mesto)
+    public Oglas(int idoglasa, int idkorisnika, String naziv, int tip, int plata, String opis, int mesto)
     {
         this.idoglasa = idoglasa;
         this.idkorisnika = idkorisnika;

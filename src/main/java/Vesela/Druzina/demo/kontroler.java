@@ -14,14 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import java.util.List;
 
 @RestController
-public class kontroler 
+public class Kontroler 
 {
     DB b = new DB();
-    /*@GetMapping("/")
-    public String home()
-    {
-        return "index";
-    }*/
+
 
     @GetMapping("/vukasinovic21")
     public String vukasinovic()
@@ -46,5 +42,8 @@ public class kontroler
     {
         return "Pickica";
     }
+
+
+    
 
 }
