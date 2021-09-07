@@ -15,16 +15,16 @@ import javax.validation.Valid;
 @Controller
 public class RegistracioniKontroler {
     
-    @Autowired
-    private KorisnikService korisnikService;
+   // @Autowired
+   // private KorisnikService korisnikService;
 
 
     @GetMapping("/")
-    public String djokica(final Model model){
-        model.addAttribute("korisnikData", new KorisnikData());
+    public String djokica()
+    {
         return "index";
     }
-
+/*
     @GetMapping("/register")
     public String registruj(final Model model){
         model.addAttribute("korisnikData", new KorisnikData());
@@ -46,5 +46,5 @@ public class RegistracioniKontroler {
         }
         //return REDIRECT+"/starter";
         return "/";
-    }
+    }*/
 }

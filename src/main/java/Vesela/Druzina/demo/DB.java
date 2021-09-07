@@ -13,10 +13,10 @@ public class DB
     {
         try 
         {
-            System.out.println("Povezujem se...");
+            System.out.println("\nPovezujem se...");
             conn = DriverManager.getConnection("jdbc:mariadb://localhost/tim23","root", "");
             stmt = conn.createStatement();
-            System.out.println("Povezan");
+            System.out.println("Povezan\n");
         }
         catch (SQLException throwables)
         {
