@@ -38,6 +38,12 @@ public class Kontroler
         return "Follow @dusan_markovic7";
     }
 
+    @GetMapping("/index.html")
+    public String houm()
+    {
+        return "index";
+    }
+
     @GetMapping("/matrif")
     public String matrif()
     {

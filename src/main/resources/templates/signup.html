@@ -114,7 +114,14 @@
                             </label>
                     
                             <div class="clearfix">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                            <button id="myButton" class="cancelbtn">Cancel</button>
+
+                            <script type="text/javascript">
+                                document.getElementById("myButton").onclick = function () 
+                                {
+                                    location.href = "index.html";
+                                };
+                            </script>
                             <button type="submit" class="signupbtn">Sign Up</button>
                             </div>
                         </div>
