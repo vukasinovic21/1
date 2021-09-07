@@ -1,5 +1,4 @@
 package Vesela.Druzina.demo.model;
-
 public class Prijava 
 {
     private int idkorisnika;

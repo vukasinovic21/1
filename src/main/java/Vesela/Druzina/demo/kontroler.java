@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import java.util.List;
 
 @RestController
-public class Kontroler 
+public class Kontroler
 {
     DB b = new DB();
 

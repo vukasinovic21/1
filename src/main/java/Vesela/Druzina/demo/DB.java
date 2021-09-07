@@ -1,5 +1,4 @@
 package Vesela.Druzina.demo;
-import Vesela.Druzina.*;
 import Vesela.Druzina.demo.model.KorisnikEntity;
 
 import java.sql.*;

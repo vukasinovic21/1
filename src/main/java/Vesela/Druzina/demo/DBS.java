@@ -1,6 +1,5 @@
 package Vesela.Druzina.demo;
 
-import Vesela.Druzina.*;
 import java.sql.*;
 
 public class DBS {

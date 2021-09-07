@@ -2,7 +2,7 @@ package Vesela.Druzina.demo.model;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import Vesela.Druzina.demo.izuzeci.KorisnikVecPostoji;
 import Vesela.Druzina.demo.izuzeci.NevazeciToken;
 import Vesela.Druzina.demo.web.KorisnikData;
 
-import java.util.Objects;
+//import java.util.Objects;
 
 @Service("KorisnikService")
 public class DefaultKorisnikService implements KorisnikService{
