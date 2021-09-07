@@ -1,8 +1,11 @@
 package Vesela.Druzina.demo;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 //import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.stereotype.Controller;
@@ -32,6 +35,13 @@ public class Kontroler
         return "signup";
     }
 */
+
+    @GetMapping("/login") //treba da napravimo html za logovanje, kao sto imamo za registraciju
+    public String login()
+    {
+        return "login";
+    }
+
     @GetMapping("/dule")
     public String dule()
     {
