@@ -1,6 +1,7 @@
 package Vesela.Druzina.demo;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import java.util.ArrayList;
 //import java.util.List;
 
-@RestController
+@Controller
 public class Kontroler
 {
     DB b = new DB();
@@ -24,7 +25,13 @@ public class Kontroler
     {
         return "Follow @vukasinovic21";
     }
-
+/*
+    @GetMapping("/signup")
+    public String signup()
+    {
+        return "signup";
+    }
+*/
     @GetMapping("/dule")
     public String dule()
     {

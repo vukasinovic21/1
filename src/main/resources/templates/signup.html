@@ -1,0 +1,127 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body class="hold-transition register-page">
+  <div class="register-box">
+    <div class="card">
+      <div class="card-body register-card-body">
+        <p class="login-box-msg">Register a new account</p>
+
+        <form action="#" th:action="@{/register}" th:object="${userData}" method="post">
+          <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+          <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+        <div class="input-group mb-3">
+        <input type="text" class="form-control"  th:field="*{firstName}" placeholder="First Name" th:errorclass="is-invalid">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+      </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control"  th:field="*{lastName}" placeholder="Last Name" th:errorclass="is-invalid">
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+       <div class="input-group mb-3">
+          <input type="email" class="form-control" th:field="*{email}" placeholder="Email" th:errorclass="is-invalid">
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" th:field="*{password}" placeholder="Password" th:errorclass="is-invalid">
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Retype password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Registrazion</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+    <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                    <h2 class="text-white mb-5">Registruj se da bi mogao da konkurises za posao!</h2>
+                        <div class="container">
+                            <h1>Sign Up</h1>
+                            <p>Please fill in this form to create an account.</p>
+                            <hr>
+                            <label for="email"><b>Email</b></label>
+                            <input type="text" placeholder="Unesi Email" name="email" required>
+                    
+                            <label for="username"><b>Korisnicko ime</b></label>
+                            <input type="text" placeholder="Unesi Korisnicko Ime" name="username" required>
+                            
+                            <label for="psw"><b>Sifra</b></label>
+                            <input type="password" placeholder="Unesi Sifru" name="psw" required>
+                    
+                            <label for="mesto"><b>Mesto</b></label>
+                            <input type="number" placeholder="Unesi Mesto" name="mesto" required>
+                            
+                            <label for="ime"><b>Mesto</b></label>
+                            <input type="text" placeholder="Unesi Ime i Prezime" name="ime" required>
+
+                            <label for="broj"><b>Broj Telefona</b></label>
+                            <input type="number" placeholder="Unesi Broj" name="broj">
+                            
+                            <label for="tip"><b>Tip Registracije</b></label>
+                            <input type="number" placeholder="Uneti 0 za korisnika, 1 za poslodavca" name="tip" required>
+                            
+                            <label>
+                            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                            </label>
+                    
+                            <div class="clearfix">
+                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                            <button type="submit" class="signupbtn">Sign Up</button>
+                            </div>
+                        </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

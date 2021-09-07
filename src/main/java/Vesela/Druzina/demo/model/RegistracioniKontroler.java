@@ -15,8 +15,8 @@ import javax.validation.Valid;
 @Controller
 public class RegistracioniKontroler {
     
-   // @Autowired
-   // private KorisnikService korisnikService;
+    @Autowired
+    private KorisnikService korisnikService;
 
 
     @GetMapping("/")
@@ -24,27 +24,30 @@ public class RegistracioniKontroler {
     {
         return "index";
     }
-/*
-    @GetMapping("/register")
-    public String registruj(final Model model){
+
+    @GetMapping("/signup")
+    public String registruj(final Model model)
+    {
         model.addAttribute("korisnikData", new KorisnikData());
-        return "nalog/register";
+        return "signup";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public String registracijaKorisnika(final @Valid  KorisnikData korisnikData, final BindingResult bindingResult, final Model model){
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors())
+        {
             model.addAttribute("registrationForm", korisnikData);
-            return "nalog/register";
+            return "signup";
         }
         try {
-            korisnikService.registrujSe(korisnikData);
-        }catch (KorisnikVecPostoji e){
+            korisnikService.registrujSe(korisnikData); 
+        }catch (KorisnikVecPostoji e)
+        {
             bindingResult.rejectValue("email", "korisnikData.email","Korisnik sa ovom email adresom vec postoji.");
             model.addAttribute("registrationForm", korisnikData);
-            return "nalog/register";
+            return "signup";
         }
         //return REDIRECT+"/starter";
-        return "/";
-    }*/
+        return "index"; //vraca na pocetnu stranicu
+    }
 }
