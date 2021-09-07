@@ -1,5 +1,5 @@
 package Vesela.Druzina.demo;
-
+//push
 import java.sql.*;
 
 public class DBS {
@@ -18,7 +18,7 @@ public class DBS {
         }
         catch (SQLException throwables)
         {
-            throwables.printStackTrace();
-        }
+            throwables.printStackTrace(); 
+        }  
     }
 }
