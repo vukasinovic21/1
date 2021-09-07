@@ -1,6 +1,6 @@
 package Vesela.Druzina.demo;
 import Vesela.Druzina.*;
-import Vesela.Druzina.demo.model.Korisnik;
+import Vesela.Druzina.demo.model.KorisnikEntity;
 
 import java.sql.*;
 
@@ -36,7 +36,7 @@ public class DB
         }
     }
 
-    public void dodajKorisnika(Korisnik korisnik){
+    public void dodajKorisnika(KorisnikEntity korisnik){
         String sql;
         String inkrement;
        /* sql = "INSERT INTO `student` (`Indeks`, `Upisan`, `Ime`, `Prezime`, `GodinaStudija`) " +

@@ -1,4 +1,4 @@
-package Vesela.Druzina.demo.model;
+/*package Vesela.Druzina.demo.model;
 
 import java.util.List;
 
@@ -22,18 +22,18 @@ public class KorisnikKontroler {
   
     //svi korisnici
     @GetMapping("/korisnik")
-    List<Korisnik> all() {
+    List<KorisnikEntity> all() {
         return repozitorijum.findAll();
     }
 
     @PostMapping("/korisnik")
-    Korisnik noviKorisnik(@RequestBody Korisnik noviKorisnik) {
+    KorisnikEntity noviKorisnik(@RequestBody KorisnikEntity noviKorisnik) {
         return repozitorijum.save(noviKorisnik);
     }
     
     //pojedinacno
     @GetMapping("/korisnik/{id}")
-    Korisnik jedan(@PathVariable Integer id) {
+    KorisnikEntity jedan(@PathVariable Integer id) {
     
         return repozitorijum.findById(id)
         .orElseThrow(() -> new KorisnikNijePronadjen(id));
@@ -45,3 +45,4 @@ public class KorisnikKontroler {
         repozitorijum.deleteById(id);
   }
 }
+*/

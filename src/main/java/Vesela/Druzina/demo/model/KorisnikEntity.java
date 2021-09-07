@@ -2,23 +2,29 @@ package Vesela.Druzina.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Column;
 import javax.persistence.Id;
 @Entity
-public class Korisnik 
+@Table(name = "Korisnik")
+public class KorisnikEntity 
 {
-       private @Id @GeneratedValue int id;
-       private String ime;
-       private String email;
-       private String username;
-       private String password;
-       private int mestoid;
-       private int mobilni;
-       private int poslodavac;
-       private int admin;
-       private String osebi;
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+        private String ime;
+        private String prezime;
+        @Column(unique = true)
+        private String email;
+        private String username;
+        private String password;
+        private int mestoid;
+        private int mobilni;
+        private int poslodavac;
+        private int admin;
+        private String osebi;
 
-
-    public Korisnik(String ime, String email, String username, String password, int mestoid, int mobilni, int poslodavac, int admin, String osebi) 
+ /*   public KorisnikEntity(String ime, String email, String username, String password, int mestoid, int mobilni, int poslodavac, int admin, String osebi) 
     {
         this.ime = ime;
         this.email = email;
@@ -29,6 +35,17 @@ public class Korisnik
         this.poslodavac = poslodavac;
         this.admin = admin;
         this.osebi = osebi;
+    } */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPrezime() {
+        return this.prezime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
     }
 
 
