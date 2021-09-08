@@ -24,6 +24,25 @@ public class KorisnikEntity
         private int admin;
         private String osebi;
 
+    public KorisnikEntity(){
+
+    }
+
+    public KorisnikEntity(int id, String ime, String prezime, String email, String username, String password, int mestoid, int mobilni, int poslodavac, int admin, String osebi) 
+    {   
+        this.id = id;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.mestoid = mestoid;
+        this.mobilni = mobilni;
+        this.poslodavac = poslodavac;
+        this.admin = admin;
+        this.osebi = osebi;
+    } 
+
     public void setId(int id) {
         this.id = id;
     }
