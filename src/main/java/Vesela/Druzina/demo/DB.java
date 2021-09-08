@@ -24,10 +24,31 @@ public class DB
         }
     }
 
-    public void dodajUBazu(String sql, String increment){
+
+
+    public void dodajKorisnikaUBazu(KorisnikEntity korisnik){
+        String sql;
+
+        sql = "INSERT INTO `korisnik`(`Ime`, `Prezime`, `Email`, `Username`, `Password`, `MestoID`, `Mobilni`, `Poslodavac`, `Admin`, `oSebi`) " +
+        "VALUES ('" + korisnik.getIme() + "', " +
+        "'" + korisnik.getPrezime() + "', " +
+        "'" + korisnik.getEmail() + "', " +
+        "'" + korisnik.getUsername() + "', " +
+        "'" + korisnik.getPassword() + "', " +
+        "'" + korisnik.getMestoid() + "', " +
+        "'" + korisnik.getMobilni() + "', " +
+        "'" + korisnik.getPoslodavac() + "', " +
+        "'" + korisnik.getAdmin() + "', " +
+        "'" + korisnik.getOsebi() + "')";
+
+        dodajUBazu(sql);
+    }
+
+
+    public void dodajUBazu(String sql){
         try {
             System.out.println("Dodajem...");
-            stmt.execute(increment);
+            //stmt.execute(increment);
             stmt.executeUpdate(sql);
             System.out.println("Dodato.");
         } catch (SQLException throwables){
@@ -35,32 +56,7 @@ public class DB
         }
     }
 
-    public void dodajKorisnika(KorisnikEntity korisnik){
-        String sql;
-        String inkrement;
-       /* sql = "INSERT INTO `student` (`Indeks`, `Upisan`, `Ime`, `Prezime`, `GodinaStudija`) " +
-                "VALUES ('" + student.getIndeks() + "', " +
-                "'" + student.getUpisan() + "', " +
-                "'" + student.getIme() + "', " +
-                "'" + student.getPrezime() + "', " +
-                "'" + student.getGodina() + "')";*/
-
-        sql = "INSERT INTO `korisnik`(`ID`, `Ime`, `Email`, `Username`, `Password`, `MestoID`, `Mobilni`, `Poslodavac`, `Admin`, `oSebi`) " +
-        "VALUES ('" + korisnik.getId() + "', " +
-        "'" + korisnik.getIme() + "', " +
-        "'" + korisnik.getEmail() + "', " +
-        "'" + korisnik.getUsername() + "', " +
-        "'" + korisnik.getPassword() + "', " +
-        "'" + korisnik.getMestoid() + "', " +
-        "'" + korisnik.getMobilni() + "', " +
-        "'" + korisnik.getPoslodavac() + "', " +
-        "'" + korisnik.getOsebi() + "', " +
-            "'" + korisnik.getAdmin() + "')";
-
-
-        inkrement = "ALTER TABLE `student` AUTO_INCREMENT=1";
-        dodajUBazu(sql,inkrement);
-    }
+    
 
     public ResultSet izvrsiSQL(String sql) {
         ResultSet rezultat = null;
@@ -74,59 +70,4 @@ public class DB
 
         return rezultat;
     }
-
-    /*
-    public void dodajUBazu(String sql, String increment)
-    {
-        try 
-        {
-            System.out.println("Inserting...");
-            stmt.execute(increment);
-            stmt.executeUpdate(sql);
-            System.out.println("Inserted.");
-        } 
-        catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
-        }
-    }*/
-    /*
-    // Izvrsava SQL naredbu i vraca rs(ResultSet)
-    public ResultSet izvrsiSQL(String sql)
-    {
-        ResultSet rs = null;
-        try 
-        {
-            System.out.println("Taking..");
-            rs = stmt.executeQuery(sql);
-            System.out.println("Taken.");
-        } 
-        catch (SQLException throwables) 
-        {
-            throwables.printStackTrace();
-        }
-
-        return rs;
-    }
-    // pomocna funkcija za sve funkcije koje proveravaju da li postoji nesto u bazi
-    // prima sql upit koji izvrsi  i vraca true ako postoji rezultat ili false ako ne postoji
-    private boolean daLiPostojiSQL(String sql)
-    {
-        try
-        {
-            ResultSet rs = stmt.executeQuery(sql);
-            if(rs.next())
-            {
-                System.out.println("Postoji!");
-                return true;
-            }
-        } 
-        catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
-        }
-
-        return false;
-    }
-    */
 }

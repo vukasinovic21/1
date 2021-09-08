@@ -24,18 +24,6 @@ public class KorisnikEntity
         private int admin;
         private String osebi;
 
- /*   public KorisnikEntity(String ime, String email, String username, String password, int mestoid, int mobilni, int poslodavac, int admin, String osebi) 
-    {
-        this.ime = ime;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.mestoid = mestoid;
-        this.mobilni = mobilni;
-        this.poslodavac = poslodavac;
-        this.admin = admin;
-        this.osebi = osebi;
-    } */
     public void setId(int id) {
         this.id = id;
     }
@@ -144,4 +132,4 @@ public class KorisnikEntity
         this.osebi = osebi;
     }
     
-}   
+}

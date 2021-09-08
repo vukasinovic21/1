@@ -1,6 +1,7 @@
 package Vesela.Druzina.demo.model;
 
 
+import Vesela.Druzina.demo.DB;
 import Vesela.Druzina.demo.izuzeci.KorisnikVecPostoji;
 import Vesela.Druzina.demo.web.KorisnikData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,69 +11,57 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
-
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 //import static com.javadevjournal.ApplicationConstant.REDIRECT;
 
 @Controller
-public class RegistracioniKontroler 
-{
+public class RegistracioniKontroler {
     
+    DB baza = new DB();
+
     @Autowired
     private KorisnikService korisnikService;
 
-    @Autowired DefaultKorisnikService dfk;
-
- //Crnja ovako radio addNew funkciju
-    @PostMapping(value="users/addNew")
-    public RedirectView addNew(KorisnikData user, RedirectAttributes redir)
-    {
-        dfk.save(user);
-        RedirectView redirectView = new RedirectView("/login", true);
-        redir.addFlashAttribute("message", "You successfully registred! You can now login!");
-        return redirectView;
-    }
-
 
     @GetMapping("/")
-    public String djokica()
+    public String index()
     {
+        System.out.println("home page");
         return "index";
-    }
-
-    @GetMapping("/users")
-    public String getJuzers()
-    {
-        return "Korisnik";
     }
 
     @GetMapping("/signup")
     public String registruj(final Model model)
     {
+        System.out.println("reg page");
         model.addAttribute("korisnikData", new KorisnikData());
         return "signup";
     }
 
-    @PostMapping("/signup")
-    public String registracijaKorisnika(final @Valid  KorisnikData korisnikData, final BindingResult bindingResult, final Model model)
-    {
-        if(bindingResult.hasErrors())
+    @PostMapping("/registrujSe")
+    public String registrujSe(final @Valid  KorisnikEntity korisnikEntity, final BindingResult bindingResult, final Model model){
+
+        System.out.println("Usao u kontroler.");
+
+       /* if(bindingResult.hasErrors())
         {
+            System.out.println("Usao u if");
             model.addAttribute("registrationForm", korisnikData);
-            return "signup";
-        }
-        try 
+            return "index";
+        } */
+        try {
+            korisnikService.registrujSe(korisnikEntity);
+            baza.dodajKorisnikaUBazu(korisnikEntity);
+            //korisnikService.save(korisnikEntity); 
+            System.out.println("Uspesna registracija");
+        }catch (KorisnikVecPostoji e)
         {
-            korisnikService.registrujSe(korisnikData); 
-        }
-        catch (KorisnikVecPostoji e)
-        {
+            System.out.println("Odradio catch");
             bindingResult.rejectValue("email", "korisnikData.email","Korisnik sa ovom email adresom vec postoji.");
-            model.addAttribute("registrationForm", korisnikData);
-            return "signup";
+            model.addAttribute("registrationForm", korisnikEntity);
+            return "index";
         }
         //return REDIRECT+"/starter";
+        System.out.println("izasao iz kontrolera");
         return "index"; //vraca na pocetnu stranicu
     }
 }

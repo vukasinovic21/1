@@ -30,8 +30,9 @@ public class DefaultKorisnikService implements KorisnikService{
     } */
 
     @Override 
-    public void registrujSe(KorisnikData korisnik1) throws KorisnikVecPostoji { 
-        
+    public void registrujSe(KorisnikEntity korisnik1) throws KorisnikVecPostoji { //probati sa KorisnikEntity
+
+        System.out.println("Usao u f-ju registrujSe u default K. servisu");
         if(proveriDaLiKorisnikPostoji(korisnik1.getEmail())){
             throw new KorisnikVecPostoji("Korisnik sa ovim mejlom vec postoji.");
         }
@@ -39,6 +40,20 @@ public class DefaultKorisnikService implements KorisnikService{
         KorisnikEntity noviKorisnik = new KorisnikEntity(); 
         BeanUtils.copyProperties(korisnik1, noviKorisnik); 
         korisnikRepo.save(noviKorisnik);
+        System.out.println(korisnik1.getId());
+        System.out.println(korisnik1.getEmail());
+        System.out.println(korisnik1.getIme());
+        System.out.println(korisnik1.getPrezime());
+        System.out.println(korisnik1.getMobilni());
+        System.out.println(korisnik1.getPassword());
+        System.out.println(korisnik1.getUsername());
+        System.out.println(korisnik1.getOsebi());
+        System.out.println(korisnik1.getAdmin());
+       /* System.out.println(korisnikRepo.count());
+        System.out.println(korisnikRepo.findAll()); */
+        System.out.println("Korisnik prijavljen");
+
+
     }
 
 
@@ -58,12 +73,6 @@ public class DefaultKorisnikService implements KorisnikService{
     public boolean verifikujKorisnika(String token) throws NevazeciToken {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    @Override
-    public void save(KorisnikData user) {
-       korisnikRepo.save(user);
-        
     }
     
 }
