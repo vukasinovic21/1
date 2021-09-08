@@ -4,6 +4,9 @@ import Vesela.Druzina.demo.model.KorisnikEntity;
 import java.sql.*;
 import java.util.ArrayList;
 
+/*
+    urediti za unos da nema duplikata..
+*/
 public class DB
 {
     private Connection konekcija = null;
