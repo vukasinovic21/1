@@ -28,15 +28,8 @@ public class Kontroler
     {
         return "Follow @vukasinovic21";
     }
-/*
-    @GetMapping("/signup")
-    public String signup()
-    {
-        return "signup";
-    }
-*/
 
-    @GetMapping("/login") //treba da napravimo html za logovanje, kao sto imamo za registraciju
+    @GetMapping("/login") 
     public String login()
     {
         return "login";

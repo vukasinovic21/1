@@ -59,5 +59,11 @@ public class DefaultKorisnikService implements KorisnikService{
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public void save(KorisnikData user) {
+        // TODO Auto-generated method stub
+        
+    }
     
 }

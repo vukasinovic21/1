@@ -1,17 +1,54 @@
 <!DOCTYPE html>
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Registrazion</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+
+        <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <form>
-            <div style="text-align:center; font-size:20px; color:green; font-weight:bold">  
-                <span th:utext="${message}"></span> 
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                        <h2 class="text-white mb-5">Uloguj se da bi mogao da konkurises za posao!</h2>
+                            <div class="container">
+                                <h1>Login</h1>
+                                <div style="text-align:center; font-size:20px; color:green; font-weight:bold">  
+                                    <span th:utext="${message}"></span> 
+                                </div>
+                                <label for="username"><b>Korisnicko ime</b></label>
+                                <input type="text" placeholder="Unesi Korisnicko Ime" name="username" required>
+                                
+                                <label for="psw"><b>Sifra</b></label>
+                                <input type="password" placeholder="Unesi Sifru" name="psw" required>
+                                <label>
+                                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                                </label>
+                            
+                                <div class="clearfix">
+                                <button id="myButton" class="cancelbtn">Cancel</button>
+        
+                                <script type="text/javascript">
+                                    document.getElementById("myButton").onclick = function () 
+                                    {
+                                        location.href = "index.html";
+                                    };
+                                </script>
+                                <button type="submit" class="signupbtn">Login</button>    
+                            </div>
+                    </div>
+                </div>
             </div>
-            <label for="username"><b>Korisnicko ime</b></label>
-            <input type="text" placeholder="Unesi Korisnicko Ime" name="username" required>
-            
-            <label for="psw"><b>Sifra</b></label>
-            <input type="password" placeholder="Unesi Sifru" name="psw" required>
         </form>
     </body>
 </html>
