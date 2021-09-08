@@ -21,11 +21,13 @@ public class RegistracioniKontroler {
     @Autowired
     private KorisnikService korisnikService;
 
+    @Autowired DefaultKorisnikService dfk;
+
  //Crnja ovako radio addNew funkciju
     @PostMapping(value="users/addNew")
     public RedirectView addNew(KorisnikData user, RedirectAttributes redir)
     {
-        korisnikService.save(user);
+        dfk.save(user);
         RedirectView redirectView = new RedirectView("/login", true);
         redir.addFlashAttribute("message", "You successfully registred! You can now login!");
         return redirectView;
