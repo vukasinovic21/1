@@ -18,7 +18,7 @@ public class RegistracioniKontroler {
     
     @Autowired
     private KorisnikService korisnikService;
-/*
+/* Crnja ovako radio addNew funkciju
     @PostMapping(value="users/addNew")
     public RedirectView addNew(Korisnik user, RedirectAttributes redir)
     {
