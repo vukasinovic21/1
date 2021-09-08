@@ -16,7 +16,8 @@ import org.springframework.web.servlet.view.RedirectView;
 //import static com.javadevjournal.ApplicationConstant.REDIRECT;
 
 @Controller
-public class RegistracioniKontroler {
+public class RegistracioniKontroler 
+{
     
     @Autowired
     private KorisnikService korisnikService;
@@ -40,6 +41,12 @@ public class RegistracioniKontroler {
         return "index";
     }
 
+    @GetMapping("/users")
+    public String getJuzers()
+    {
+        return "Korisnik";
+    }
+
     @GetMapping("/signup")
     public String registruj(final Model model)
     {
@@ -48,15 +55,18 @@ public class RegistracioniKontroler {
     }
 
     @PostMapping("/signup")
-    public String registracijaKorisnika(final @Valid  KorisnikData korisnikData, final BindingResult bindingResult, final Model model){
+    public String registracijaKorisnika(final @Valid  KorisnikData korisnikData, final BindingResult bindingResult, final Model model)
+    {
         if(bindingResult.hasErrors())
         {
             model.addAttribute("registrationForm", korisnikData);
             return "signup";
         }
-        try {
+        try 
+        {
             korisnikService.registrujSe(korisnikData); 
-        }catch (KorisnikVecPostoji e)
+        }
+        catch (KorisnikVecPostoji e)
         {
             bindingResult.rejectValue("email", "korisnikData.email","Korisnik sa ovom email adresom vec postoji.");
             model.addAttribute("registrationForm", korisnikData);
