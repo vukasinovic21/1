@@ -1,6 +1,6 @@
 package Vesela.Druzina.demo.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 
 import Vesela.Druzina.demo.izuzeci.KorisnikNijePronadjen;
 import Vesela.Druzina.demo.izuzeci.KorisnikVecPostoji;

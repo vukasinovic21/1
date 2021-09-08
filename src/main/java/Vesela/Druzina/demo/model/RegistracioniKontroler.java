@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 //import static com.javadevjournal.ApplicationConstant.REDIRECT;
 
@@ -18,16 +20,17 @@ public class RegistracioniKontroler {
     
     @Autowired
     private KorisnikService korisnikService;
-/* Crnja ovako radio addNew funkciju
+
+ //Crnja ovako radio addNew funkciju
     @PostMapping(value="users/addNew")
-    public RedirectView addNew(Korisnik user, RedirectAttributes redir)
+    public RedirectView addNew(KorisnikData user, RedirectAttributes redir)
     {
         korisnikService.save(user);
         RedirectView redirectView = new RedirectView("/login", true);
         redir.addFlashAttribute("message", "You successfully registred! You can now login!");
         return redirectView;
     }
-*/
+
 
     @GetMapping("/")
     public String djokica()

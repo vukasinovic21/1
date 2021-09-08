@@ -62,7 +62,7 @@ public class DefaultKorisnikService implements KorisnikService{
 
     @Override
     public void save(KorisnikData user) {
-        // TODO Auto-generated method stub
+       korisnikRepo.save(user);
         
     }
     
