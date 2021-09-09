@@ -11,5 +11,4 @@ public class DemoApplication {
 		//dule dudule gace mu se nadule jel radi sad
 		//20.08.2021. Kole se ukljucuje u projekat
 	}
-
 }

@@ -29,12 +29,26 @@ public class RegistracioniKontroler {
         return "index";
     }
 
+    @GetMapping("/index.html")
+    public String index1()
+    {
+        System.out.println("home page");
+        return "index";
+    }
+
     @GetMapping("/signup")
     public String registruj(final Model model)
     {
         System.out.println("reg page");
         model.addAttribute("korisnikData", new KorisnikData());
         return "signup";
+    }
+
+    @GetMapping("/login")
+    public String logovanje(final Model model)
+    {
+        System.out.println("log page");
+        return "login";
     }
 
     @PostMapping("/registrujSe")
