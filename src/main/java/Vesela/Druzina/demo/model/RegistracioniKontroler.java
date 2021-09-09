@@ -22,12 +22,6 @@ public class RegistracioniKontroler {
     
     DB baza = new DB();
 
-    @Autowired
-    private KorisnikService korisnikService;
-
-
-
-
     @GetMapping("/")
     public String index()
     {
@@ -76,7 +70,7 @@ public class RegistracioniKontroler {
             //korisnikService.save(korisnikEntity);
             if(flag == 0){
                 System.out.println("Uspesna registracija");
-                return "uspesnaReg";
+                return "index";
             }
             else if(flag == 1){
                 System.out.println("Neuspesna registracija. Uneli ste email koji vec postoji");

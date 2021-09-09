@@ -2,7 +2,7 @@ package Vesela.Druzina.demo.model;
 
 public enum TipKorisnika {
     
+    POSLODAVAC,
     ADMIN,
-    KORISNIK,
     Editor;
 }
