@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 /*
     urediti za unos da nema duplikata..
+    ako se doda isti mora se dodati alert
 */
 public class DB
 {
     private Connection konekcija = null;
     private Statement stmt = null;
+    ArrayList<KorisnikEntity> listaKorisnika = new  ArrayList<KorisnikEntity>();
     String sql = null;
     
     public DB()
@@ -23,13 +25,12 @@ public class DB
             System.out.println("Povezan\n");
             System.out.println("Citam sve iz baze:");
 
-            ArrayList<KorisnikEntity> listaKorisnika = new  ArrayList<KorisnikEntity>();
             listaKorisnika = ucitajKorisnikeIzBaze();
-          /*  System.out.println(listaKorisnika.size());
+            System.out.println(listaKorisnika.size());
             for(int i = 0; i < listaKorisnika.size(); i++)
-                System.out.println(listaKorisnika.get(i).getId());
+                System.out.println(listaKorisnika.get(i).getEmail());
 
-            System.out.println("Procitao sve iz baze."); */
+            System.out.println("Procitao sve iz baze."); 
         }
         catch (SQLException throwables)
         {
@@ -57,7 +58,27 @@ public class DB
     }
 
 
-    public void dodajKorisnikaUBazu(KorisnikEntity korisnik){
+    public int dodajKorisnikaUBazu(KorisnikEntity korisnik) throws SQLException{
+        
+        listaKorisnika = ucitajKorisnikeIzBaze(); //moraju da se ucitaju svi korisnici pri svakom unosu novog
+
+        //prvi check za mejl:
+        for(int i = 0; i < listaKorisnika.size(); i++){
+            if(listaKorisnika.get(i).getEmail().equals(korisnik.getEmail())){
+
+                System.out.println("\nKorisnik sa tim mejlom vec postoji \n");
+                return 1; //mejl greska
+            }
+        }
+        //check za username
+        for(int i = 0; i < listaKorisnika.size(); i++){
+            if(listaKorisnika.get(i).getUsername().equals(korisnik.getUsername())){
+
+                System.out.println("\nKorisnik sa tim username-om vec postoji \n");
+                return 2; //username greska
+            }
+        }
+
         String sql;
 
         sql = "INSERT INTO `korisnik`(`Ime`, `Prezime`, `Email`, `Username`, `Password`, `MestoID`, `Mobilni`, `Poslodavac`, `Admin`, `oSebi`) " +
@@ -73,6 +94,8 @@ public class DB
         "'" + korisnik.getOsebi() + "')";
 
         dodajUBazu(sql);
+
+        return 0; //nema gresaka
     }
 
 
@@ -80,7 +103,7 @@ public class DB
         try {
             System.out.println("Dodajem...");
             //stmt.execute(increment);
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql); //Izvrsavanje SQL-a
             System.out.println("Dodato.");
         } catch (SQLException throwables){
             throwables.printStackTrace();
@@ -89,7 +112,7 @@ public class DB
 
     
 
-    public ResultSet izvrsiSQL(String sql) {
+/*    public ResultSet izvrsiSQL(String sql) {
         ResultSet rezultat = null;
         try {
             System.out.println("Uzimam n-torku...");
@@ -100,5 +123,5 @@ public class DB
         }
 
         return rezultat;
-    }
+    }*/
 }

@@ -40,7 +40,7 @@ public class DefaultKorisnikService implements KorisnikService{
         KorisnikEntity noviKorisnik = new KorisnikEntity(); 
         BeanUtils.copyProperties(korisnik1, noviKorisnik); 
         korisnikRepo.save(noviKorisnik);
-        System.out.println(korisnik1.getId());
+    /*    System.out.println(korisnik1.getId());
         System.out.println(korisnik1.getEmail());
         System.out.println(korisnik1.getIme());
         System.out.println(korisnik1.getPrezime());
