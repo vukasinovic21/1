@@ -34,7 +34,7 @@ public class RegistracioniKontroler {
     {
         System.out.println("home page");
         return "index";
-    } */
+    }  */
 
     @GetMapping("/signup")
     public String registruj(final Model model)
