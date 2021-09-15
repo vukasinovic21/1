@@ -60,7 +60,7 @@ public class DB
 
     public int dodajKorisnikaUBazu(KorisnikEntity korisnik) throws SQLException{
         
-        listaKorisnika = ucitajKorisnikeIzBaze(); //moraju da se ucitaju svi korisnici pri svakom unosu novog
+       // listaKorisnika = ucitajKorisnikeIzBaze(); //moraju da se ucitaju svi korisnici pri svakom unosu novog
 
         //prvi check za mejl:
         for(int i = 0; i < listaKorisnika.size(); i++){
@@ -94,6 +94,8 @@ public class DB
         "'" + korisnik.getOsebi() + "')";
 
         dodajUBazu(sql);
+
+        listaKorisnika.add(korisnik); //dodaje korisnika na kraj, optimizacija
 
         return 0; //nema gresaka
     }
