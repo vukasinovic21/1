@@ -139,7 +139,7 @@ public class RegistracioniKontroler {
         if(flag == 5)
             return "indexPoslodavac";
         System.out.println("Izlazim iz logina");
-        return "index";
+        return "indexNeregistrovan";
     }
 
     @GetMapping("/novOglas")
