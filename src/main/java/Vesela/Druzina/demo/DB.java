@@ -5,8 +5,13 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /*
-    urediti za unos da nema duplikata..
-    ako se doda isti mora se dodati alert
+    urediti za unos da nema duplikata.. URADJENO
+    ako se doda isti mora se dodati alert URADJENO
+    opadajuca lista za tip poslodavca i da li je admin
+    logout 
+    dodati proveru za admina
+    dodati da moze da se korisnik ucini adminom
+    MESTO U REG
 */
 public class DB
 {
@@ -14,9 +19,9 @@ public class DB
     private Statement stmt = null;
     ArrayList<KorisnikEntity> listaKorisnika = new  ArrayList<KorisnikEntity>();
     String sql = null;
-    
-    public DB()
-    {
+    private KorisnikEntity prijavljenKorisnik;
+
+    public DB(){
         try 
         {
             System.out.println("\nPovezujem se...");
@@ -97,9 +102,46 @@ public class DB
 
         listaKorisnika.add(korisnik); //dodaje korisnika na kraj, optimizacija
 
-        return 0; //nema gresaka
+        if(korisnik.getAdmin() == 1)
+            return 3; //admin
+
+        if(korisnik.getPoslodavac() == 0)
+            return 4; //korisnik
+
+        if(korisnik.getPoslodavac() == 1)
+            return 5; //poslodavac
+
+        return 0; //greska
     }
 
+    public int ulogujKorisnika(KorisnikEntity korisnik) throws SQLException{
+
+        //check da li postoji username
+        for(int i = 0; i < listaKorisnika.size(); i++)
+            if(listaKorisnika.get(i).getUsername().equals(korisnik.getUsername()))
+                if(listaKorisnika.get(i).getPassword().equals(korisnik.getPassword())){
+                    //dobra sifra
+                    prijavljenKorisnik = listaKorisnika.get(i);
+                    
+                    if(prijavljenKorisnik.getAdmin() == 1)
+                        return 3; //admin
+
+                    if(prijavljenKorisnik.getPoslodavac() == 0)
+                        return 4; //korisnik
+
+                    if(prijavljenKorisnik.getPoslodavac() == 1)
+                        return 5; //poslodavac
+                        
+                    
+                }
+                else{
+                    //losa sifra
+                    return 2;
+                }
+                
+        
+        return 1; //ne postoji taj username
+    }
 
     public void dodajUBazu(String sql){
         try {

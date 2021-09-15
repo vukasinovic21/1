@@ -17,7 +17,7 @@
 </head>
 <body>
 
-  <form action="#" th:action="@{/registrujSe}" th:object="${KorisnikEntity}" method="post">
+<form action="#" th:action="@{/registrujSe}" th:object="${KorisnikEntity}" method="post">
 <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
@@ -51,9 +51,6 @@
                         <label class="levo" for="tip"><b>Tip Registracije</b></label>
                         <input class="levo" type="number" placeholder="Uneti 0 za korisnika, 1 za poslodavca" name="poslodavac" required>
 
-                        <label class="levo" for="admin"><b>Admin</b></label>
-                        <input class="levo" type="number" placeholder="admin" name="admin" required>
-
                         <label for="o sebi"><b>O sebi</b></label>
                         <input type="text" placeholder="o sebi" name="osebi" required>
                         
@@ -67,7 +64,7 @@
                         <script type="text/javascript">
                             document.getElementById("myButton").onclick = function () 
                             {
-                                location.href = "index.html";
+                                location.href = "indexNeregistrovan.html";
                             };
                         </script>
                         <button type="submit" class="signupbtn">Sign Up</button>

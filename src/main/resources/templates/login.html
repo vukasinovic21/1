@@ -15,6 +15,8 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
+
+        <form action="#" th:action="@{/ulogujSe}" th:object="${KorisnikEntity}" method="post">
         <div>
             <div style="text-align:center; font-size:20px; color:green; font-weight:bold">  
                 <span th:utext="${message}"></span> 
@@ -29,11 +31,8 @@
                                 <label for="username"><b>Korisnicko ime</b></label>
                                 <input type="text" placeholder="Unesi Korisnicko Ime" name="username" required>
                                 
-                                <label for="psw"><b>Sifra</b></label>
-                                <input type="password" placeholder="Unesi Sifru" name="psw" required>
-                                <label>
-                                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-                                </label>
+                                <label for="password"><b>Sifra</b></label>
+                                <input type="password" placeholder="Unesi Sifru" name="password" required>
                             
                                 <div class="clearfix">
                                 <button id="myButton" class="cancelbtn">Cancel</button>
@@ -50,5 +49,6 @@
                 </div>
             </div>
         </div>
+    </form>
     </body>
 </html>

@@ -1,6 +1,6 @@
 package Vesela.Druzina.demo.model;
 
-
+//import org.json.simple.JSONObject;
 import Vesela.Druzina.demo.DB;
 import Vesela.Druzina.demo.izuzeci.KorisnikVecPostoji;
 import Vesela.Druzina.demo.web.KorisnikData;
@@ -26,15 +26,15 @@ public class RegistracioniKontroler {
     public String index()
     {
         System.out.println("home page");
-        return "index";
+        return "indexNeregistrovan";
     }
 
-    @GetMapping("/index.html")
+/*    @GetMapping("/index.html")
     public String index1()
     {
         System.out.println("home page");
         return "index";
-    }
+    } */
 
     @GetMapping("/signup")
     public String registruj(final Model model)
@@ -42,13 +42,6 @@ public class RegistracioniKontroler {
         System.out.println("reg page");
         model.addAttribute("korisnikData", new KorisnikData());
         return "signup";
-    }
-
-    @GetMapping("/login")
-    public String logovanje(final Model model)
-    {
-        System.out.println("log page");
-        return "login";
     }
 
     @PostMapping("/registrujSe")
@@ -68,9 +61,17 @@ public class RegistracioniKontroler {
            // korisnikService.registrujSe(korisnikEntity);
             flag = baza.dodajKorisnikaUBazu(korisnikEntity);
             //korisnikService.save(korisnikEntity);
-            if(flag == 0){
+            if(flag == 3){
                 System.out.println("Uspesna registracija");
-                return "index";
+                return "indexAdmin";
+            }
+            if(flag == 4){
+                System.out.println("Uspesna registracija");
+                return "indexKorisnik";
+            }
+            if(flag == 5){
+                System.out.println("Uspesna registracija");
+                return "indexPoslodavac";
             }
             else if(flag == 1){
                 System.out.println("Neuspesna registracija. Uneli ste email koji vec postoji");
@@ -96,5 +97,41 @@ public class RegistracioniKontroler {
         //return "index"; //vraca na pocetnu stranicu
         return "index";
         
+    }
+
+    @GetMapping("/login")
+    public String ulogujSe(final Model model)
+    {
+        System.out.println("log page");
+        model.addAttribute("korisnikData", new KorisnikData());
+        return "login";
+    }
+
+    //korisnik ne postoji
+    //sifra nije dobra
+    @PostMapping("/ulogujSe")
+    public String ulogujSe(KorisnikEntity korisnikEntity) throws SQLException{
+        System.out.println("Usao u login");
+
+        int flag = baza.ulogujKorisnika(korisnikEntity);
+
+        if(flag == 1){ //nepostojeci username
+            System.out.println("Ne postoji taj username");
+            return "neuspesnaRegMail";
+        }
+
+        if(flag == 2){ //losa sifra
+
+            System.out.println("Netacna sifra");
+            return "neuspesnaRegMail";
+        }
+
+        if(flag == 4)
+            return "indexKorisnik";
+
+        if(flag == 5)
+            return "indexPoslodavac";
+        System.out.println("Izlazim iz logina");
+        return "index";
     }
 }
