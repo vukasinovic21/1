@@ -1,5 +1,7 @@
 package Vesela.Druzina.demo;
 import Vesela.Druzina.demo.model.KorisnikEntity;
+import Vesela.Druzina.demo.model.Oglas;
+import Vesela.Druzina.demo.model.OglasHTML;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -141,6 +143,26 @@ public class DB
                 
         
         return 1; //ne postoji taj username
+    }
+
+    public void dodajOglas(OglasHTML oglasHTML){
+
+        System.out.println("USAO U DODAJOGLAS U DB");
+        System.out.println(prijavljenKorisnik.getUsername());
+        Oglas oglas = new Oglas();
+        oglas.setIdkorisnika(prijavljenKorisnik.getId());
+        
+
+
+        sql = "INSERT INTO `oglas`(`IDKorisnika`, `Naziv`, `Plata`, `Opis`) " +
+        "VALUES ('" + prijavljenKorisnik.getId() + "', " +
+        "'" + oglasHTML.getNaziv() + "', " +
+        "'" + oglasHTML.getPlata() + "', " +
+        "'" + oglasHTML.getOpis() + "')";
+
+        dodajUBazu(sql);
+
+        System.out.println("Oglas uspesno dodat");
     }
 
     public void dodajUBazu(String sql){

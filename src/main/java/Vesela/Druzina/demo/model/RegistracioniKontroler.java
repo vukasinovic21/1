@@ -29,12 +29,12 @@ public class RegistracioniKontroler {
         return "indexNeregistrovan";
     }
 
-/*    @GetMapping("/index.html")
+   @GetMapping("/indexNeregistrovan")
     public String index1()
     {
         System.out.println("home page");
-        return "index";
-    }  */
+        return "indexNeregistrovan";
+    }  
 
     @GetMapping("/signup")
     public String registruj(final Model model)
@@ -134,4 +134,22 @@ public class RegistracioniKontroler {
         System.out.println("Izlazim iz logina");
         return "index";
     }
+
+    @GetMapping("/novOglas")
+    public String novOglas()
+    {
+        System.out.println("nov oglas page");
+        //model.addAttribute("korisnikData", new KorisnikData());
+        return "novOglas";
+    }
+
+    @PostMapping("/napraviOglas")
+    public String napraviOglas(OglasHTML oglasHTML){
+        System.out.println("Usao u napravi oglas");
+
+        baza.dodajOglas(oglasHTML);
+
+        return "indexPoslodavac";
+    }
+
 }

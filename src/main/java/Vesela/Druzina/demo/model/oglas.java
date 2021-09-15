@@ -1,25 +1,33 @@
 package Vesela.Druzina.demo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "oglas")
 public class Oglas
-{
+{   
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idoglasa;
     private int idkorisnika;
     private String naziv;
-    private int tip;
     private int plata;
     private String opis;
-    private int mesto;
 
 
-    public Oglas(int idoglasa, int idkorisnika, String naziv, int tip, int plata, String opis, int mesto)
+    public Oglas(){
+    }
+
+    public Oglas(int idoglasa, int idkorisnika, String naziv, int plata, String opis)
     {
         this.idoglasa = idoglasa;
         this.idkorisnika = idkorisnika;
         this.naziv = naziv;
-        this.tip = tip;
         this.plata = plata;
         this.opis = opis;
-        this.mesto = mesto;
     }
 
 
@@ -52,16 +60,6 @@ public class Oglas
         this.naziv = naziv;
     }
 
-    public int getTip() 
-    {
-        return this.tip;
-    }
-
-    public void setTip(int tip) 
-    {
-        this.tip = tip;
-    }
-
     public int getPlata()
     {
         return this.plata;
@@ -81,15 +79,4 @@ public class Oglas
     {
         this.opis = opis;
     }
-
-    public int getMesto() 
-    {
-        return this.mesto;
-    }
-
-    public void setMesto(int mesto) 
-    {
-        this.mesto = mesto;
-    }
-
 }
