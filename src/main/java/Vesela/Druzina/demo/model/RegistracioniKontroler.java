@@ -32,9 +32,16 @@ public class RegistracioniKontroler {
    @GetMapping("/indexNeregistrovan")
     public String index1()
     {
-        System.out.println("home page");
+        System.out.println("neregistrovan");
         return "indexNeregistrovan";
     }  
+
+    @GetMapping("/indexPoslodavac")
+    public String index2()
+    {
+        System.out.println("poslodavac");
+        return "indexPoslodavac";
+    } 
 
     @GetMapping("/signup")
     public String registruj(final Model model)
