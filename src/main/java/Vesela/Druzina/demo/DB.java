@@ -209,7 +209,7 @@ public class DB
          return listaPoslodavaca;
      }
 
-     public ArrayList<Oglas> ucitajOglase() throws SQLException
+    public ArrayList<Oglas> ucitajOglase() throws SQLException
     {
          stmt = konekcija.createStatement();
          String sql = "Select * From oglas";

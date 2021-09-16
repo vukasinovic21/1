@@ -79,6 +79,12 @@
   }
 }
 
+table
+{
+    color: #04AA6D;
+}
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

@@ -53,21 +53,35 @@
                     <div class="col-lg-8">
                         <h2 class="text-white mb-4">Built with Bootstrap 5</h2>
                         <p class="text-white-50">
-                            Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template
-                            The theme is open source, and you can use it for any purpose, personal or commercial.
                         </p>
-                        <!--<div th:each="oglas : ${oglasiDostupni}" > //ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..
+                        <p class="text-white-50">OGLASI</p>
+                        <table width="100%" cellspacing="0">
+                            <thead>
                             <tr>
-                                <td th:text="${oglas.idoglasa}"></td>
-                                <td th:text="${oglas.idkorisnika}"></td>
-                                <td th:text="${oglas.naziv}"></td>
-                                <td th:text="${oglas.plata}"></td>
-                                <td th:text="${oglas.opis}"></td>
-                                <td>
-                                    <a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>
-                                </td>
+                                <th>IDOglasa</th>
+                                <th>IDKorisnika predmeta</th>
+                                <th>Naziv</th>
+                                <th>Plata</th>
+                                <th>Opis</th>
                             </tr>
-                        </div>-->
+                            </thead>
+                            <tbody>
+                                <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
+                                    <tr>
+                                        <td th:text="${Oglas.idoglasa}"></td>
+                                        <td th:text="${Oglas.idkorisnika}"></td>
+                                        <td th:text="${Oglas.naziv}"></td>
+                                        <td th:text="${Oglas.plata}"></td>
+                                        <td th:text="${Oglas.opis}"></td>
+                                        <td>
+                                            <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
+                                        </td>
+                                    </tr>
+                                </div>
+                            </tbody>
+                        </table>
+                        
+                        <p class="text-white-50">KRAJ OGLASA</p>
                     </div>
                 </div>
                 <img class="img-fluid" src="assets/img/ipad.png" alt="..." />
@@ -81,8 +95,31 @@
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
-                            <h4>Shoreline</h4>
-                            <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+                            <table width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Ime</th>
+                                    <th>Prezime</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Mobilni</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <div th:each="Poslodavac : ${poslodavciDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
+                                        <tr>
+                                            <td th:text="${Poslodavac.ime}"></td>
+                                            <td th:text="${Poslodavac.prezime}"></td>
+                                            <td th:text="${Poslodavac.username}"></td>
+                                            <td th:text="${Poslodavac.email}"></td>
+                                            <td th:text="${Poslodavac.mobilni}"></td>
+                                            <td>
+                                                <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
+                                            </td>
+                                        </tr>
+                                    </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

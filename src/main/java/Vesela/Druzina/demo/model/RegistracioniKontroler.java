@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 //import java.security.Principal;
 import java.sql.SQLException;
 
@@ -24,15 +25,15 @@ import javax.validation.Valid;
 public class RegistracioniKontroler {
     
     DB baza = new DB();
-
+/*
     @GetMapping("/")
     public String index()
     {
         System.out.println("home page");
         return "indexNeregistrovan";
     }
-
-
+*/
+/*
     @GetMapping("/indexNeregistrovan")
     public String index1() 
     {
@@ -40,15 +41,14 @@ public class RegistracioniKontroler {
         return "indexNeregistrovan";
     }  
 
-    /*
-   @GetMapping("/indexNeregistrovan") //ovako nesto se salju podaci da bi se koristili u html-u
-    public String index1(Model model, Principal principal) throws SQLException
+   */
+    @GetMapping("/") //ovako nesto se salju podaci da bi se koristili u html-u
+    public String index1(Model model) throws SQLException
     {
-        model.addAttribute("oglasiDostupni", ucitajOglase();
-        System.out.println("neregistrovan");
+        model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        model.addAttribute("poslodavciDostupni", baza.ucitajPoslodavce());
         return "indexNeregistrovan";
     }  
-*/
 
     @GetMapping("/indexPoslodavac")
     public String index2()
@@ -148,8 +148,8 @@ public class RegistracioniKontroler {
         }
 
         if(flag == 4)
-            return "indexKorisnik";
-
+            return "indexKorisnik"; 
+            
         if(flag == 5)
             return "indexPoslodavac";
         System.out.println("Izlazim iz logina");
