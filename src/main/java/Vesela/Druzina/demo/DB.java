@@ -13,7 +13,10 @@ import java.util.ArrayList;
     logout 
     dodati proveru za admina
     dodati da moze da se korisnik ucini adminom
+    da moze admin da brise korisnike (+ i oglase)
     MESTO U REG
+    dodati dugme za prijavu
+    napraviti da poslodavac moze da brise svoj oglas
 */
 public class DB
 {

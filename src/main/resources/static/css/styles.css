@@ -81,9 +81,23 @@
 
 table
 {
-    color: #04AA6D;
+    color: #64a19d;
+    border-collapse: collapse; 
+    
 }
 
+th, td {
+  text-align: left;
+  padding: 30px 0;
+  padding-left: 10px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #64a19d;
+  color: white;
+}
 
 body {
   margin: 0;

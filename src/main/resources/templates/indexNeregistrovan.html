@@ -51,15 +51,13 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8">
-                        <h2 class="text-white mb-4">Built with Bootstrap 5</h2>
+                        <h2 class="text-white mb-4">Dostupni oglasi</h2>
                         <p class="text-white-50">
                         </p>
-                        <p class="text-white-50">OGLASI</p>
                         <table width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>IDOglasa</th>
-                                <th>IDKorisnika predmeta</th>
+                                <th>Username</th>
                                 <th>Naziv</th>
                                 <th>Plata</th>
                                 <th>Opis</th>
@@ -68,7 +66,6 @@
                             <tbody>
                                 <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
                                     <tr>
-                                        <td th:text="${Oglas.idoglasa}"></td>
                                         <td th:text="${Oglas.idkorisnika}"></td>
                                         <td th:text="${Oglas.naziv}"></td>
                                         <td th:text="${Oglas.plata}"></td>
@@ -80,8 +77,6 @@
                                 </div>
                             </tbody>
                         </table>
-                        
-                        <p class="text-white-50">KRAJ OGLASA</p>
                     </div>
                 </div>
                 <img class="img-fluid" src="assets/img/ipad.png" alt="..." />
@@ -92,8 +87,7 @@
             <div class="container px-4 px-lg-5">
                 <!-- Featured Project Row-->
                 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div>
-                    <div class="col-xl-4 col-lg-5">
+                <!--    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div> -->
                         <div class="featured-text text-center text-lg-left">
                             <table width="100%" cellspacing="0">
                                 <thead>
@@ -123,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Project One Row-->
+                <!-- Project One Row
                 <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
                     <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-01.jpg" alt="..." /></div>
                     <div class="col-lg-6">
@@ -137,8 +131,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Project Two Row-->
+                </div> -->
+                <!-- Project Two Row -->
                 <div class="row gx-0 justify-content-center">
                     <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="..." /></div>
                     <div class="col-lg-6 order-lg-first">

@@ -50,6 +50,15 @@ public class RegistracioniKontroler {
         return "indexNeregistrovan";
     }  
 
+    @GetMapping("/indexKorisnik")
+    public String indexK(Model model) throws SQLException
+    {   
+        model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        model.addAttribute("poslodavciDostupni", baza.ucitajPoslodavce());
+        System.out.println("indexKorisnik");
+        return "indexKorisnik";
+    }
+
     @GetMapping("/indexPoslodavac")
     public String index2()
     {
@@ -147,14 +156,24 @@ public class RegistracioniKontroler {
             return "neuspesnaRegMail";
         }
 
-        if(flag == 4)
-            return "indexKorisnik"; 
+        if(flag == 4){
+            
+            return "redirect:/indexKorisnik"; 
+        }
             
         if(flag == 5)
-            return "indexPoslodavac";
+            return "redirect:/indexPoslodavac";
+
         System.out.println("Izlazim iz logina");
         return "indexNeregistrovan";
     }
+
+  /*  @GetMapping("/indexPoslodavac")
+    public String indexP()
+    {
+        System.out.println("indexPoslodavac");
+        return "indexPoslodavac";
+    } */
 
     @GetMapping("/novOglas")
     public String novOglas()
