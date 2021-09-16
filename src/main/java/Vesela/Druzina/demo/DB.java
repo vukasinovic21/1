@@ -164,7 +164,7 @@ public class DB
         return 1; //ne postoji taj username
     }
 
-    public void dodajOglas(OglasHTML oglasHTML){
+    public void dodajOglas(OglasHTML oglasHTML) throws SQLException{
 
         System.out.println("USAO U DODAJOGLAS U DB");
         System.out.println(prijavljenKorisnik.getUsername());
@@ -228,7 +228,19 @@ public class DB
          return listaOglasa;
      }
 
+     public void dodajPrijavu(Oglas oglas) throws SQLException{
 
+        String sql;
+
+        sql = "INSERT INTO `prijave`(`IDKorisnika`, `IDOglasa`, `OpisPrijave`) " +
+        "VALUES ('" + oglas.getIdkorisnika() + "', " +
+        "'" + oglas.getIdoglasa() + "', " +
+        "'" + oglas.getOpis() + "')";
+
+        dodajUBazu(sql);
+
+        System.out.println("Uspesno dodao prijavu u bazu");
+     }
 
 
 

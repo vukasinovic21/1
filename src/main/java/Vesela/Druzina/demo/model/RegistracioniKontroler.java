@@ -187,16 +187,32 @@ public class RegistracioniKontroler {
     public String napraviOglas(OglasHTML oglasHTML){
         System.out.println("Usao u napravi oglas");
 
-        baza.dodajOglas(oglasHTML);
+        try {
+            baza.dodajOglas(oglasHTML);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         return "indexPoslodavac";
     }
 
+    
     @PostMapping("/apliciraj")
     public String apliciraj(Oglas oglas){
-
-        System.out.println(oglas.getNaziv());
+        /*
+            poslati na mejl CV i prijavu
+            ubaciti u bazu
+        */
         System.out.println("Usao u apliciraj");
+       
+        try {
+            baza.dodajPrijavu(oglas);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         return "redirect:/indexKorisnik";
     }
 }
