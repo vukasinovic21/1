@@ -20,6 +20,8 @@ public class DB
     private Connection konekcija = null;
     private Statement stmt = null;
     ArrayList<KorisnikEntity> listaKorisnika = new  ArrayList<KorisnikEntity>();
+    ArrayList<KorisnikEntity> listaPoslodavaca = new  ArrayList<KorisnikEntity>();
+    ArrayList<Oglas> listaOglasa = new  ArrayList<Oglas>();
     String sql = null;
     private KorisnikEntity prijavljenKorisnik;
 
@@ -37,7 +39,21 @@ public class DB
             for(int i = 0; i < listaKorisnika.size(); i++)
                 System.out.println(listaKorisnika.get(i).getEmail());
 
-            System.out.println("Procitao sve iz baze."); 
+            System.out.println("Procitao sve iz baze.\n"); 
+            System.out.println("\nCitam poslodavce:");
+            listaPoslodavaca = ucitajPoslodavce();
+            for(int i = 0; i < listaPoslodavaca.size(); i++)
+                System.out.println(listaPoslodavaca.get(i).getUsername());
+
+            System.out.println("Procitao sve poslodavce.\n"); 
+
+            System.out.println("\nCitam Oglase:");
+            listaOglasa = ucitajOglase();
+            for(int i = 0; i < listaOglasa.size(); i++)
+                System.out.println(listaOglasa.get(i).getNaziv());
+
+            System.out.println("Procitao sve oglase.\n"); 
+
         }
         catch (SQLException throwables)
         {
@@ -176,7 +192,42 @@ public class DB
         }
     }
 
-    
+    public ArrayList<KorisnikEntity> ucitajPoslodavce() throws SQLException
+    {
+         stmt = konekcija.createStatement();
+         String sql = "Select * From korisnik where Poslodavac = 1";
+         ResultSet rst;
+         rst = stmt.executeQuery(sql);
+         ArrayList<KorisnikEntity> listaPoslodavaca = new ArrayList<>();
+         while (rst.next())
+         {
+             KorisnikEntity korisnik = new KorisnikEntity(rst.getInt("id"), rst.getString("ime"), rst.getString("prezime"), rst.getString("email"),
+                 rst.getString("username"), rst.getString("Password"), rst.getInt("mestoid"), rst.getInt("mobilni"), 
+                 rst.getInt("poslodavac"), rst.getInt("admin"), rst.getString("oSebi"));
+             listaPoslodavaca.add(korisnik);
+         }
+         return listaPoslodavaca;
+     }
+
+     public ArrayList<Oglas> ucitajOglase() throws SQLException
+    {
+         stmt = konekcija.createStatement();
+         String sql = "Select * From oglas";
+         ResultSet rst;
+         rst = stmt.executeQuery(sql);
+         ArrayList<Oglas> listaOglasa = new ArrayList<>();
+         while (rst.next())
+         {
+             Oglas og = new Oglas(rst.getInt("idoglasa"), rst.getInt("idkorisnika"), rst.getString("naziv"), rst.getInt("plata"),
+                 rst.getString("opis"));
+                 listaOglasa.add(og);
+         }
+         return listaOglasa;
+     }
+
+
+
+
 
 /*    public ResultSet izvrsiSQL(String sql) {
         ResultSet rezultat = null;
