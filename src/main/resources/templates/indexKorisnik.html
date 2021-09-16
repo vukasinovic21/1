@@ -65,18 +65,33 @@
                             </tr>
                             </thead>
                             <tbody>
+                                <form action="#" th:action="@{/apliciraj}" th:object="${Oglas}" method="post">
                                 <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
                                     <tr>
+                                        
                                         <td th:text="${Oglas.idkorisnika}"></td>
                                         <td th:text="${Oglas.naziv}"></td>
                                         <td th:text="${Oglas.plata}"></td>
                                         <td th:text="${Oglas.opis}"></td>
-                                        <td><button class="btn btn-primary">Apliciraj</button></td>
+                                        
                                         <td>
-                                            <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
-                                        </td>
-                                    </tr>
+                                       <!--    <form action="#" th:action="@{/apliciraj}" th:object="${Oglas}" method="post">
+                                                <input type="hidden" th:value="*{idoglasa}"/>
+                                                <input type="hidden" th:field="*{idkorisnika}"/>
+                                                <input type="hidden" th:field="*{naziv}"/>
+                                                <input type="hidden" th:field="*{plata}"/>
+                                                <input type="hidden" th:field="*{opis}"/>
+                                                <button type="submit" class="btn btn-primary">Apliciraj</button>
+                                            </form> --> 
+                                            <button type="submit" class="btn btn-primary">Apliciraj</button>
+                                            </td>
+
+                                    <!--    <td>
+                                            <a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>
+                                        </td> -->
+                                    </tr> 
                                 </div>
+                                </form>
                             </tbody>
                         </table>
                     </div>

@@ -192,4 +192,11 @@ public class RegistracioniKontroler {
         return "indexPoslodavac";
     }
 
+    @PostMapping("/apliciraj")
+    public String apliciraj(Oglas oglas){
+
+        System.out.println(oglas.getNaziv());
+        System.out.println("Usao u apliciraj");
+        return "redirect:/indexKorisnik";
+    }
 }
