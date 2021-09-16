@@ -53,10 +53,21 @@
                     <div class="col-lg-8">
                         <h2 class="text-white mb-4">Built with Bootstrap 5</h2>
                         <p class="text-white-50">
-                            Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-                            <a href="https://startbootstrap.com/theme/grayscale/">the preview page.</a>
+                            Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template
                             The theme is open source, and you can use it for any purpose, personal or commercial.
                         </p>
+                        <!--<div th:each="oglas : ${oglasiDostupni}" > //ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..
+                            <tr>
+                                <td th:text="${oglas.idoglasa}"></td>
+                                <td th:text="${oglas.idkorisnika}"></td>
+                                <td th:text="${oglas.naziv}"></td>
+                                <td th:text="${oglas.plata}"></td>
+                                <td th:text="${oglas.opis}"></td>
+                                <td>
+                                    <a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>
+                                </td>
+                            </tr>
+                        </div>-->
                     </div>
                 </div>
                 <img class="img-fluid" src="assets/img/ipad.png" alt="..." />

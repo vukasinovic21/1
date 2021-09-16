@@ -1,7 +1,9 @@
 package Vesela.Druzina.demo.model;
 
 //import org.json.simple.JSONObject;
+
 import Vesela.Druzina.demo.DB;
+//import Vesela.Druzina.demo.DB.ucitajOglase;
 //import Vesela.Druzina.demo.izuzeci.KorisnikVecPostoji;
 import Vesela.Druzina.demo.web.KorisnikData;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.ResponseBody;
 
+//import java.security.Principal;
 import java.sql.SQLException;
 
 import javax.validation.Valid;
@@ -29,12 +32,23 @@ public class RegistracioniKontroler {
         return "indexNeregistrovan";
     }
 
-   @GetMapping("/indexNeregistrovan")
-    public String index1()
+
+    @GetMapping("/indexNeregistrovan")
+    public String index1() 
     {
         System.out.println("neregistrovan");
         return "indexNeregistrovan";
     }  
+
+    /*
+   @GetMapping("/indexNeregistrovan") //ovako nesto se salju podaci da bi se koristili u html-u
+    public String index1(Model model, Principal principal) throws SQLException
+    {
+        model.addAttribute("oglasiDostupni", ucitajOglase();
+        System.out.println("neregistrovan");
+        return "indexNeregistrovan";
+    }  
+*/
 
     @GetMapping("/indexPoslodavac")
     public String index2()
