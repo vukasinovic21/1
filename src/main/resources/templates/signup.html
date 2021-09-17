@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -28,13 +27,13 @@
                         <p>Please fill in this form to create an account.</p>
                         <hr>
                         <label for="email"><b>Email</b></label>
-                        <input type="text" placeholder="Unesi Email" name="email" required>
+                        <input type="text" placeholder="Unesi Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Karakteri posle kojih mora da se nadje @ znak posle kojeg mora jos karaktera pa . pa jos 2 slova.\n Primer ispravne: ime123@gmail.com" required>
                 
                         <label for="username"><b>Korisnicko ime</b></label>
-                        <input type="text" placeholder="Unesi Korisnicko Ime" name="username" required>
+                        <input type="text" placeholder="Unesi Korisnicko Ime" name="username" pattern="(?=.*\d)(?=.*[A-z]).{6,}" title="Mora imati 6 karaktera u kombinaciji slova i brojeva" required>
                         
                         <label for="password"><b>Sifra</b></label>
-                        <input type="password" placeholder="Unesi Sifru" name="password" required>
+                        <input type="password" placeholder="Unesi Sifru" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Mora sadrzati veliko slovo, malo slovo, broj i ukupno najmanje 8 karaktera" required>
                 
                         <label for="ime"><b>Ime</b></label>
                         <input type="text" placeholder="Unesi ime" name="ime" required>
@@ -76,4 +75,3 @@
   </form>
 </body>
 </html>
-

@@ -29,10 +29,10 @@
                             <div class="container">
                                 <h1>Login</h1>
                                 <label for="username"><b>Korisnicko ime</b></label>
-                                <input type="text" placeholder="Unesi Korisnicko Ime" name="username" required>
+                                <input type="text" placeholder="Unesi Korisnicko Ime" name="username" pattern="(?=.*\d)(?=.*[A-z]).{6,}" title="Mora imati 6 karaktera u kombinaciji slova i brojeva" required>
                                 
                                 <label for="password"><b>Sifra</b></label>
-                                <input type="password" placeholder="Unesi Sifru" name="password" required>
+                                <input type="password" placeholder="Unesi Sifru" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Mora sadrzati veliko slovo, malo slovo, broj i ukupno najmanje 8 karaktera" required>
                             
                                 <div class="clearfix">
                                 <button id="myButton" class="cancelbtn">Cancel</button>

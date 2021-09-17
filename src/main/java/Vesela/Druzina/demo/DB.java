@@ -67,7 +67,11 @@ public class DB {
                 System.out.println(listaOglasa.get(i).getNaziv());
             System.out.println("Procitao sve oglase.\n");
 
+            
             listaPrijava = ucitajPrijave();
+            for (int i = 0; i < listaPrijava.size(); i++)
+                System.out.println(listaPrijava.get(i).getIdkorisnika() +"  "+ listaPrijava.get(i).getIdoglasa());
+            System.out.println("Procitao sve prijave.\n");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -223,7 +227,7 @@ public class DB {
             Oglas og = new Oglas(rst.getInt("idoglasa"), rst.getInt("idkorisnika"), rst.getString("emailKorisnika"), rst.getString("naziv"),
                     rst.getInt("plata"), rst.getString("opis"));
             listaOglasa.add(og);
-        }
+        } 
         return listaOglasa;
     }
 
@@ -300,7 +304,9 @@ public class DB {
                 //System.out.println(listaOglasa.get(i).getNaziv());
 
                 if(listaOglasa.get(i).getIdkorisnika() == korisnik.getId()){
-
+                    System.out.println("ID Oglasa: "+listaOglasa.get(i).getIdoglasa()); 
+                    System.out.println("listaPrijava.size() = " + listaPrijava.size());
+                    //treba da brise sve prijave za i-ti oglas
                     for(int z = 0; z < listaPrijava.size(); z++){
 
                         System.out.println("Z = "+ z);
@@ -309,14 +315,19 @@ public class DB {
                             System.out.println("Nasao dva ista IDoglasa");
                             stmt.executeQuery("DELETE FROM `prijave` WHERE `idoglasa` = " + listaPrijava.get(z).getIdoglasa());
                             listaPrijava = ucitajPrijave();
+                            System.out.println("Stavljam z na nulu");
                             z = 0;
+                            System.out.println("Z = "+ z);
                         }
                     }
-
-                    stmt.executeQuery("DELETE FROM `oglas` WHERE `idkorisnika` = " + korisnik.getId());
-                    listaOglasa = ucitajOglase();
-                    i = 0;
                 } 
+            }
+ 
+            for(int i = 0; i < listaOglasa.size(); i++){
+
+                stmt.executeQuery("DELETE FROM `oglas` WHERE `idkorisnika` = " + korisnik.getId());
+                listaOglasa = ucitajOglase();
+                i = 0;
             }
         }
 
