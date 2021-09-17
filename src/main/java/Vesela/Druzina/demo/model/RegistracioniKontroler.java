@@ -66,6 +66,15 @@ public class RegistracioniKontroler {
         return "indexPoslodavac";
     } 
 
+    @GetMapping("/indexAdmin")
+    public String indexA(Model model) throws SQLException
+    {   
+        model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        model.addAttribute("korisnikDostupno", baza.ucitajKorisnikeIzBaze());
+        System.out.println("indexAdmin");
+        return "indexAdmin";
+    }
+
     @GetMapping("/signup")
     public String registruj(final Model model)
     {
@@ -91,17 +100,13 @@ public class RegistracioniKontroler {
            // korisnikService.registrujSe(korisnikEntity);
             flag = baza.dodajKorisnikaUBazu(korisnikEntity);
             //korisnikService.save(korisnikEntity);
-            if(flag == 3){
-                System.out.println("Uspesna registracija");
-                return "indexAdmin";
-            }
             if(flag == 4){
                 System.out.println("Uspesna registracija");
-                return "indexKorisnik";
+                return "indexNeregistrovan";
             }
             if(flag == 5){
                 System.out.println("Uspesna registracija");
-                return "indexPoslodavac";
+                return "indexNeregistrovan";
             }
             else if(flag == 1){
                 System.out.println("Neuspesna registracija. Uneli ste email koji vec postoji");
@@ -156,13 +161,17 @@ public class RegistracioniKontroler {
             return "neuspesnaRegMail";
         }
 
+        if(flag == 3){
+            return "redirect:/indexAdmin"; 
+        }
+
         if(flag == 4){
-            
             return "redirect:/indexKorisnik"; 
         }
             
-        if(flag == 5)
+        if(flag == 5){
             return "redirect:/indexPoslodavac";
+        }
 
         System.out.println("Izlazim iz logina");
         return "indexNeregistrovan";
@@ -214,5 +223,49 @@ public class RegistracioniKontroler {
         }
         
         return "redirect:/indexKorisnik";
+    }
+    
+    @PostMapping("/obrisiOglas")
+    public String obrisiOglas(Oglas oglas){
+        System.out.println("Usao u obrisi");
+       
+        try {
+            baza.obrisiOglas(oglas);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        return "redirect:/indexAdmin";
+    }
+
+    @PostMapping("/obrisiKorisnika")
+    public String obrisiKorisnika(KorisnikEntity korisnik){
+
+        System.out.println("Usao u obrisiKorisnika");
+        //System.out.println(korisnik.getId());
+        try {
+            baza.obrisiKorisnika(korisnik);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        return "redirect:/indexAdmin";
+    }
+
+    @PostMapping("/napraviAdminom")
+    public String napraviAdminom(KorisnikEntity korisnik){
+
+        System.out.println(korisnik.getId());
+        System.out.println("Usao u napraviAdminom");
+        try {
+            baza.napraviAdminom(korisnik);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return "redirect:/indexAdmin";
     }
 }

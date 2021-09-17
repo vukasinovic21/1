@@ -28,8 +28,9 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="#about">Oglasi</a></li>
                         <li class="nav-item"><a class="nav-link" href="#projects">Poslodavci</a></li>
-                        <li class="nav-item"><a class="nav-link" href="http://localhost:8080/signup">Registracija</a></li>
-                        <li class="nav-item"><a class="nav-link" href="http://localhost:8080/login">Prijava</a></li>    
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:8080/">Izloguj se</a></li>
+                    <!--   <li class="nav-item"><a class="nav-link" href="http://localhost:8080/signup">Registracija</a></li>  --> 
+                    <!-- <li class="nav-item"><a class="nav-link" href="http://localhost:8080/login">Prijava</a></li>    --> 
                     </ul>
                 </div>
             </div>
@@ -53,33 +54,44 @@
                     <div class="col-lg-8">
                         <h2 class="text-white mb-4">Dostupni oglasi</h2>
                         <p class="text-white-50">
-                        </p>
                         <table width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Username</th>
+                                <th>IdKorisnika</th>
                                 <th>Naziv</th>
                                 <th>Plata</th>
                                 <th>Opis</th>
+                                <th>Prijavi se za posao</th>
                             </tr>
                             </thead>
                             <tbody>
+                                
                                 <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
-                                    <tr>
+                                    <tr>                             
                                         <td th:text="${Oglas.idkorisnika}"></td>
                                         <td th:text="${Oglas.naziv}"></td>
                                         <td th:text="${Oglas.plata}"></td>
                                         <td th:text="${Oglas.opis}"></td>
+                                        
                                         <td>
-                                            <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
-                                        </td>
-                                    </tr>
+                                            <form action="#" th:action="@{/obrisiOglas}" th:object="${Oglas}" method="post">
+                                                <input type="hidden" th:value="*{idoglasa}" th:name="idoglasa">  
+                                                <button type="submit" class="btn btn-primary">Obriši oglas</button>
+                                             </form> 
+                                             
+                                         </td>
+
+                                    <!--    <td>
+                                            <a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>
+                                        </td> -->
+                                    </tr> 
                                 </div>
+                                
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <img class="img-fluid" src="assets/img/ipad.png" alt="..." />
+
             </div>
         </section>
         <!-- Projects-->
@@ -87,9 +99,11 @@
             <div class="container px-4 px-lg-5">
                 <!-- Featured Project Row-->
                 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                <!--    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div> -->
+                    
                         <div class="featured-text text-center text-lg-left">
-                            <h2 class="text-black-50">Poslodavci</h2>
+                            
+                            <h2 class="text-black mb-4">Registrovani korisnici</h2>
+
                             <table width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
@@ -98,19 +112,37 @@
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Mobilni</th>
+                                    <th>asd</th>
+                                    <th>asd</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <div th:each="Poslodavac : ${poslodavciDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
+                                    <div th:each="Korisnik : ${korisnikDostupno}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
                                         <tr>
-                                            <td th:text="${Poslodavac.ime}"></td>
-                                            <td th:text="${Poslodavac.prezime}"></td>
-                                            <td th:text="${Poslodavac.username}"></td>
-                                            <td th:text="${Poslodavac.email}"></td>
-                                            <td th:text="${Poslodavac.mobilni}"></td>
+                                            <td th:text="${Korisnik.ime}"></td>
+                                            <td th:text="${Korisnik.prezime}"></td>
+                                            <td th:text="${Korisnik.username}"></td>
+                                            <td th:text="${Korisnik.email}"></td>
+                                            <td th:text="${Korisnik.mobilni}"></td>
+                                            
                                             <td>
-                                                <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
-                                            </td>
+                                                <form action="#" th:action="@{/obrisiKorisnika}" th:object="${Korisnik}" method="post">
+                                                    <input type="hidden" th:value="*{id}" th:name="id">
+                                                    <input type="hidden" th:value="*{poslodavac}" th:name="poslodavac">  
+                                                    <button type="submit" class="btn btn-primary">Obriši korisnika</button>
+                                                 </form> 
+                                                 
+                                             </td>
+
+                                             <td>
+                                                <form action="#" th:action="@{/napraviAdminom}" th:object="${Korisnik}" method="post">
+                                                    <input type="hidden" th:value="*{id}" th:name="id">
+                                                    <button type="submit" class="btn btn-primary">Napravi adminom</button>
+                                                 </form> 
+                                                 
+                                             </td>
+
+                                            
                                         </tr>
                                     </div>
                                 </tbody>
@@ -118,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Project One Row
+                <!-- Project One Row-->
                 <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
                     <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-01.jpg" alt="..." /></div>
                     <div class="col-lg-6">
@@ -132,8 +164,8 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
-                <!-- Project Two Row -->
+                </div>
+                <!-- Project Two Row-->
                 <div class="row gx-0 justify-content-center">
                     <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="..." /></div>
                     <div class="col-lg-6 order-lg-first">

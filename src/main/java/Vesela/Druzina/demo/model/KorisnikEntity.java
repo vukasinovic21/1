@@ -39,7 +39,7 @@ public class KorisnikEntity
         this.mestoid = mestoid;
         this.mobilni = mobilni;
         this.poslodavac = poslodavac;
-        this.admin = 0;
+        this.admin = admin;
         this.osebi = osebi;
     } 
 
