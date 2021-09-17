@@ -102,11 +102,11 @@ public class RegistracioniKontroler {
             //korisnikService.save(korisnikEntity);
             if(flag == 4){
                 System.out.println("Uspesna registracija");
-                return "indexNeregistrovan";
+                return "redirect:/";
             }
             if(flag == 5){
                 System.out.println("Uspesna registracija");
-                return "indexNeregistrovan";
+                return "redirect:/";
             }
             else if(flag == 1){
                 System.out.println("Neuspesna registracija. Uneli ste email koji vec postoji");

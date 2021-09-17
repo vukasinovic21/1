@@ -123,7 +123,7 @@ public class DB {
 
         dodajUBazu(sql);
 
-        listaKorisnika.add(korisnik); // dodaje korisnika na kraj, optimizacija
+        listaKorisnika = ucitajKorisnikeIzBaze(); // dodaje korisnika na kraj, optimizacija
 
         if (korisnik.getAdmin() == 1)
             return 3; // admin
@@ -145,6 +145,7 @@ public class DB {
                 if (listaKorisnika.get(i).getPassword().equals(korisnik.getPassword())) {
                     // dobra sifra
                     prijavljenKorisnik = listaKorisnika.get(i);
+                    System.out.println(prijavljenKorisnik.getUsername());
                     if (prijavljenKorisnik.getAdmin() == 1)
                         return 3; // admin
 
