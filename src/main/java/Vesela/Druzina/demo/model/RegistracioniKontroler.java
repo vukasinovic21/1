@@ -60,11 +60,12 @@ public class RegistracioniKontroler {
     }
 
     @GetMapping("/indexPoslodavac")
-    public String index2()
+    public String index2(Model model) throws SQLException
     {
+        model.addAttribute("korisnikNaOglasu", baza.nizKorisnikaNaOglasu());
         System.out.println("poslodavac");
         return "indexPoslodavac";
-    } 
+    }
 
     @GetMapping("/indexAdmin")
     public String indexA(Model model) throws SQLException

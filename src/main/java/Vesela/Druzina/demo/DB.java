@@ -1,6 +1,7 @@
 package Vesela.Druzina.demo;
 
 import Vesela.Druzina.demo.model.KorisnikEntity;
+import Vesela.Druzina.demo.model.KorisnikNaOglasu;
 import Vesela.Druzina.demo.model.Oglas;
 import Vesela.Druzina.demo.model.OglasHTML;
 import Vesela.Druzina.demo.model.Prijava;
@@ -18,15 +19,15 @@ import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
         opadajuca lista za tip poslodavca i da li je admin URADJENO
         logout URADJENO
 
-        dodati da moze da se korisnik ucini adminom (tabela sa korisnicima i dugme da ga napravi adminom, menja u bekendu i u bazi)
+        dodati da moze da se korisnik ucini adminom (tabela sa korisnicima i dugme da ga napravi adminom, menja u bekendu i u bazi) URADJENO
 
-        da moze admin da brise korisnike (+ i oglase)
+        da moze admin da brise korisnike (+ i oglase) URADJENO
         MESTO U REG da pise slovima
         dodati dugme za prijavu URADJENO
-        napraviti da poslodavac moze da brise svoj oglas
-        REGEX za mail
-        Slika za radnika
-        logout u bekendu odraditi
+        napraviti da poslodavac moze da brise svoj oglas 
+        REGEX za mail URADJENO
+        Slika za radnika 
+        logout u bekendu odraditi URADJENO
         ne prikazivati tabele ako su prazne
         da admin nema "napravi adminom"
 */
@@ -37,6 +38,7 @@ public class DB {
     ArrayList<KorisnikEntity> listaPoslodavaca = new ArrayList<KorisnikEntity>();
     ArrayList<Oglas> listaOglasa = new ArrayList<Oglas>();
     ArrayList<Prijava> listaPrijava = new ArrayList<Prijava>();
+    ArrayList<KorisnikNaOglasu> listaKorisnikaNaOglasu;
     String sql = null;
     private KorisnikEntity prijavljenKorisnik;
 
@@ -145,6 +147,8 @@ public class DB {
     }
 
     public int ulogujKorisnika(KorisnikEntity korisnik) throws SQLException {
+
+
 
         // check da li postoji username
         for (int i = 0; i < listaKorisnika.size(); i++)
@@ -355,8 +359,53 @@ public class DB {
         stmt.executeQuery("UPDATE `korisnik` SET `admin` =" + 1 + " WHERE `id` = " + korisnik.getId());        
     }
 
-    public void obrisiPrijavu(KorisnikEntity korisnik, Oglas oglas){
+    public ArrayList<KorisnikNaOglasu> nizKorisnikaNaOglasu() throws SQLException{
 
+        ArrayList<KorisnikNaOglasu> listaKorisnikaNaOglasu = new ArrayList<KorisnikNaOglasu>();
+        
+        stmt = konekcija.createStatement(); 
+        listaOglasa = ucitajOglase();
+        listaKorisnika = ucitajKorisnikeIzBaze();
+        listaPrijava = ucitajPrijave();
+        for (int i = 0; i < listaOglasa.size(); i++)    // Ulazimo u petlju sa svim oglasima i trazimo koji su postavljeni od trenutno prijavljenog korisnika
+        {
+            if(listaOglasa.get(i).getIdkorisnika() == prijavljenKorisnik.getId()) // Nasli smo idoglasa koji je postavio prijavljeni korisnik
+            {
+                for(int j = 0; j < listaPrijava.size(); j++)    // Prolazimo kroz sve prijave i trazimo prijave na pronadjeni idoglasa
+                {
+                    for(int k = 0; k <listaKorisnika.size(); k++)   // Prolazimo kroz sve korisnike i trazimo one koji su u PRIJAVI, njihove informacije treba da vidi PRIJAVLJENI KORISNIK
+                    {
+                        if(listaPrijava.get(j).getIdkorisnika() == listaKorisnika.get(k).getId() && listaOglasa.get(i).getIdoglasa() == listaPrijava.get(j).getIdoglasa())
+                        {
+                            //System.out.println(listaKorisnika.get(k).getUsername());
+                            //System.out.println(listaOglasa.get(i).getNaziv());
+                            KorisnikNaOglasu ko = new KorisnikNaOglasu();
+                            
+                            ko.setUsername(listaKorisnika.get(k).getUsername());
+                            ko.setPrezime(listaKorisnika.get(k).getPrezime());
+                            ko.setPoslodavac(listaKorisnika.get(k).getPoslodavac());
+                            ko.setPassword(listaKorisnika.get(k).getPassword());
+                            ko.setOsebi(listaKorisnika.get(k).getOsebi());
+                            ko.setMobilni(listaKorisnika.get(k).getMobilni());
+                            ko.setMestoid(listaKorisnika.get(k).getMestoid());
+                            ko.setImeOglasa(listaOglasa.get(i).getNaziv());
+                            ko.setIme(listaKorisnika.get(k).getIme());
+                            ko.setId(listaKorisnika.get(k).getId());
+                            ko.setEmail(listaKorisnika.get(k).getEmail());
+                            ko.setAdmin(listaKorisnika.get(k).getAdmin());
 
+                            listaKorisnikaNaOglasu.add(ko);
+                            //System.out.println(ko.getUsername());
+                            //System.out.println("IME OGLASA:\n");
+                            //System.out.println(ko.getImeOglasa());
+                            break;
+                            // Treba napraviti listu : listaKorisnikaNaOglasu, dodavanjem celog korisnika listaKorisnika.get(k).getId() jer on ispunjava sta treba
+                        }
+                    }
+                    
+                }
+            }
+        }
+        return listaKorisnikaNaOglasu; 
     }
 }
