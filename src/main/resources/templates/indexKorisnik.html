@@ -78,8 +78,10 @@
                                                 <input type="hidden" th:value="*{idoglasa}" th:name="idoglasa"> 
                                                 <input type="hidden" th:value="*{idkorisnika}" th:name="idkorisnika"> 
                                                 <button type="submit" class="btn btn-primary">Apliciraj</button>
+                                                
                                              </form> 
                                              
+                                             <a th:href="'mailto:' + ${Oglas.emailKorisnika}">Apliciraj Putem mejla</a>
                                          </td>
 
                                     <!--    <td>

@@ -3,6 +3,7 @@ package Vesela.Druzina.demo;
 import Vesela.Druzina.demo.model.KorisnikEntity;
 import Vesela.Druzina.demo.model.Oglas;
 import Vesela.Druzina.demo.model.OglasHTML;
+import Vesela.Druzina.demo.model.Prijava;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class DB {
     ArrayList<KorisnikEntity> listaKorisnika = new ArrayList<KorisnikEntity>();
     ArrayList<KorisnikEntity> listaPoslodavaca = new ArrayList<KorisnikEntity>();
     ArrayList<Oglas> listaOglasa = new ArrayList<Oglas>();
+    ArrayList<Prijava> listaPrijava = new ArrayList<Prijava>();
     String sql = null;
     private KorisnikEntity prijavljenKorisnik;
 
@@ -63,8 +65,9 @@ public class DB {
             listaOglasa = ucitajOglase();
             for (int i = 0; i < listaOglasa.size(); i++)
                 System.out.println(listaOglasa.get(i).getNaziv());
-
             System.out.println("Procitao sve oglase.\n");
+
+            listaPrijava = ucitajPrijave();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -171,8 +174,7 @@ public class DB {
         oglas.setIdkorisnika(prijavljenKorisnik.getId());
 
 
-        sql = "INSERT INTO `oglas`(`IDKorisnika`, `Naziv`, `Plata`, `Opis`) " + "VALUES ('" + prijavljenKorisnik.getId()
-                + "', " + "'" + oglasHTML.getNaziv() + "', " + "'" + oglasHTML.getPlata() + "', " + "'"
+        sql = "INSERT INTO `oglas`(`IDKorisnika`, `EmailKorisnika`, `Naziv`, `Plata`, `Opis`) " + "VALUES ('" + prijavljenKorisnik.getId() + "', "+" '" + prijavljenKorisnik.getEmail() + "', "+" '" + oglasHTML.getNaziv() + "', "+" '" + oglasHTML.getPlata() + "', " + "'"
                 + oglasHTML.getOpis() + "')";
 
         dodajUBazu(sql);
@@ -194,6 +196,7 @@ public class DB {
     }
 
     public ArrayList<KorisnikEntity> ucitajPoslodavce() throws SQLException {
+
         stmt = konekcija.createStatement();
         String sql = "Select * From korisnik where Poslodavac = 1";
         ResultSet rst;
@@ -210,17 +213,30 @@ public class DB {
     }
 
     public ArrayList<Oglas> ucitajOglase() throws SQLException {
+
         stmt = konekcija.createStatement();
         String sql = "Select * From oglas";
         ResultSet rst;
         rst = stmt.executeQuery(sql);
         ArrayList<Oglas> listaOglasa = new ArrayList<>();
         while (rst.next()) {
-            Oglas og = new Oglas(rst.getInt("idoglasa"), rst.getInt("idkorisnika"), rst.getString("naziv"),
+            Oglas og = new Oglas(rst.getInt("idoglasa"), rst.getInt("idkorisnika"), rst.getString("emailKorisnika"), rst.getString("naziv"),
                     rst.getInt("plata"), rst.getString("opis"));
             listaOglasa.add(og);
         }
         return listaOglasa;
+    }
+
+    public ArrayList<Prijava> ucitajPrijave() throws SQLException{
+
+        stmt = konekcija.createStatement();
+        ResultSet rst = stmt.executeQuery("Select * from prijave");
+        ArrayList<Prijava> listaPrijava = new ArrayList<>();
+        while (rst.next()) {
+            Prijava og = new Prijava(rst.getInt("idkorisnika"), rst.getInt("idoglasa"), rst.getString("opisPrijave"));
+                    listaPrijava.add(og);
+        }
+        return listaPrijava;
     }
 
     public void dodajPrijavu(Oglas oglas) throws SQLException {
@@ -231,6 +247,8 @@ public class DB {
                 + prijavljenKorisnik.getId() + "', " + "'" + oglas.getIdoglasa() + "', " + "'" + oglas.getOpis() + "')";
 
         dodajUBazu(sql);
+
+        listaPrijava = ucitajPrijave();
 
         System.out.println("Uspesno dodao prijavu u bazu");
     }
@@ -247,24 +265,57 @@ public class DB {
             }
         }
 
+        for(int i = 0; i < listaPrijava.size(); i++){
+
+            if(listaPrijava.get(i).getIdoglasa() == oglas.getIdoglasa()){
+
+                stmt.executeQuery("DELETE FROM `prijave` WHERE `IDOglasa` = " + oglas.getIdoglasa());
+                listaPrijava = ucitajPrijave();
+                i = 0;
+            }
+        }
         
         listaOglasa = ucitajOglase();
     }
 
     public void obrisiKorisnika(KorisnikEntity korisnik) throws SQLException{
 
-        if(korisnik.getPoslodavac() == 1){
+        if(korisnik.getPoslodavac() == 0){
 
+            for(int i = 0; i < listaPrijava.size(); i++){
+                System.out.println("Usao");
+                if(listaPrijava.get(i).getIdkorisnika() == korisnik.getId()){
+
+                    stmt.executeQuery("DELETE FROM `prijave` WHERE `idKorisnika` = " + korisnik.getId());
+                    listaPrijava = ucitajPrijave();
+                    i = 0;
+                }
+            }
+        }
+
+        if(korisnik.getPoslodavac() == 1){
+  
             for(int i = 0; i < listaOglasa.size(); i++){
                 
-                System.out.println(listaOglasa.get(i).getNaziv());
+                //System.out.println(listaOglasa.get(i).getNaziv());
 
                 if(listaOglasa.get(i).getIdkorisnika() == korisnik.getId()){
-                    
-                    System.out.println("USAO");
+
+                    for(int z = 0; z < listaPrijava.size(); z++){
+
+                        System.out.println("Z = "+ z);
+
+                        if(listaPrijava.get(z).getIdoglasa() == listaOglasa.get(i).getIdoglasa()){
+                            System.out.println("Nasao dva ista IDoglasa");
+                            stmt.executeQuery("DELETE FROM `prijave` WHERE `idoglasa` = " + listaPrijava.get(z).getIdoglasa());
+                            listaPrijava = ucitajPrijave();
+                            z = 0;
+                        }
+                    }
+
                     stmt.executeQuery("DELETE FROM `oglas` WHERE `idkorisnika` = " + korisnik.getId());
                     listaOglasa = ucitajOglase();
-                    i = 0; 
+                    i = 0;
                 } 
             }
         }
@@ -293,14 +344,8 @@ public class DB {
         stmt.executeQuery("UPDATE `korisnik` SET `admin` =" + 1 + " WHERE `id` = " + korisnik.getId());        
     }
 
+    public void obrisiPrijavu(KorisnikEntity korisnik, Oglas oglas){
 
 
-    /*
-     * public ResultSet izvrsiSQL(String sql) { ResultSet rezultat = null; try {
-     * System.out.println("Uzimam n-torku..."); rezultat = stmt.executeQuery(sql);
-     * System.out.println("Uzeto."); } catch (SQLException throwables) {
-     * throwables.printStackTrace(); }
-     * 
-     * return rezultat; }
-     */
+    }
 }

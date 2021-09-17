@@ -243,7 +243,7 @@ public class RegistracioniKontroler {
     public String obrisiKorisnika(KorisnikEntity korisnik){
 
         System.out.println("Usao u obrisiKorisnika");
-        //System.out.println(korisnik.getId());
+        System.out.println(korisnik.getId());
         try {
             baza.obrisiKorisnika(korisnik);
         } catch (SQLException e) {
