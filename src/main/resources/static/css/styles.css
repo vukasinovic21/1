@@ -217,10 +217,22 @@ button:hover {
   background-color: #f44336;
 }
 
+
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {
   float: left;
   width: 50%;
+  text-decoration: none;
+  color: white;
+}
+
+.cancelbtn:hover
+{
+  background-color: rgb(255, 66, 66);
+  color:white;
+}
+a:hover {
+  color: white;
 }
 
 /* Add padding to container elements */
@@ -1010,10 +1022,7 @@ progress {
   --bs-gutter-y: 1.5rem;
 }
 
-.g-5,
-.gx-5 {
-  --bs-gutter-x: 3rem;
-}
+
 
 .g-5,
 .gy-5 {
@@ -1649,10 +1658,7 @@ progress {
     --bs-gutter-y: 1.5rem;
   }
 
-  .g-lg-5,
-.gx-lg-5 {
-    --bs-gutter-x: 3rem;
-  }
+
 
   .g-lg-5,
 .gy-lg-5 {

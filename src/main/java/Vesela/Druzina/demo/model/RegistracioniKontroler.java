@@ -43,7 +43,7 @@ public class RegistracioniKontroler {
             e.printStackTrace();
         }
 
-        return "redirect:/";
+        return "redirect:/#Oglasi";
     }  
 
     @GetMapping("/indexKorisnik")
@@ -200,7 +200,7 @@ public class RegistracioniKontroler {
             e.printStackTrace();
         }
 
-        return "indexPoslodavac";
+        return "redirect:/indexPoslodavac";
     }
 
     

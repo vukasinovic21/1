@@ -425,7 +425,7 @@ public class DB {
             }
             else
             {
-                if((((listaOglasa.get(i).getNaziv()).toLowerCase()).contains(imeOglasa.getNaziv())) == true)
+                if((((listaOglasa.get(i).getNaziv()).toLowerCase()).contains(imeOglasa.getNaziv().toLowerCase())) == true)
                 {
                     novalista.add(listaOglasa.get(i));
                 }

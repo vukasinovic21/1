@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Neuspešna registracija</title>
+    <title>Neuspešna prijava</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -16,16 +16,16 @@
 </head>
 <body>
 
-    <h1>Neuspešna registracija. Korisničko ime već postoji! :(</h1>
+    <h1>Neuspešna prijava.</h1>
 
-    <button id="myButton" class="cancelbtn">Nazad na registraciju</button>
+    <button id="myButton" class="cancelbtn">Vrati me na login!</button>
 
-                        <script type="text/javascript">
-                            document.getElementById("myButton").onclick = function () 
-                            {
-                                location.href = "http://localhost:8080/signup";
-                            };
-                        </script>
+    <script type="text/javascript">
+        document.getElementById("myButton").onclick = function () 
+        {
+            location.href = "http://localhost:8080/login";
+        };
+    </script>
 
 </body>
 </html>
