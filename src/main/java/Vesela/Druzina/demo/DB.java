@@ -5,6 +5,7 @@ import Vesela.Druzina.demo.model.KorisnikNaOglasu;
 import Vesela.Druzina.demo.model.Oglas;
 import Vesela.Druzina.demo.model.OglasHTML;
 import Vesela.Druzina.demo.model.Prijava;
+import Vesela.Druzina.demo.model.ImeOglasa;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -407,5 +408,32 @@ public class DB {
             }
         }
         return listaKorisnikaNaOglasu; 
+    }
+
+    public ArrayList<Oglas> pretragaOglasa(ImeOglasa imeOglasa) throws SQLException{
+        listaOglasa = ucitajOglase();
+        ArrayList<Oglas> novalista = new ArrayList<Oglas>();
+        for (int i = 0; i < listaOglasa.size(); i++)
+        {
+            if(imeOglasa == null)
+            {
+                if((((listaOglasa.get(i).getNaziv()).toLowerCase()).contains("") == true))
+                {
+                    novalista.add(listaOglasa.get(i));
+                }
+            }
+            else
+            {
+                if((((listaOglasa.get(i).getNaziv()).toLowerCase()).contains(imeOglasa.getNaziv())) == true)
+                {
+                    novalista.add(listaOglasa.get(i));
+                }
+            }
+        }
+        //System.out.println("Pretrazeno je : " + imeOglasa.getNaziv());
+        System.out.println("Svi oglasi koji sadrze u svom nazivu dati pojam: \n");
+        for(int j = 0; j < novalista.size(); j++)
+            System.out.println(novalista.get(j).getNaziv());
+        return novalista;
     }
 }

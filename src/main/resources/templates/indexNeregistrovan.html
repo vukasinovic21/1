@@ -41,7 +41,13 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Projekat</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">Trazis posao? Dosao si na pravo mesto.</h2>
-                        <a class="btn btn-primary" href="#about">Nadji savrsen posao</a>
+                        <form action="#" th:action="@{/pretraga}" th:object="${ImeOglasa}" method="post">
+
+                            <label for="naziv"><b>Pretraga oglasa</b></label>
+                            <input type="text" placeholder="Pretraga" name="naziv">
+
+                            <button type="submit" class="btn btn-primary">Pretrazi</button>
+                        </form>
                     </div>
                 </div>
             </div>

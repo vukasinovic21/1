@@ -1,22 +1,12 @@
 package Vesela.Druzina.demo.model;
 
-//import org.json.simple.JSONObject;
-
 import Vesela.Druzina.demo.DB;
-//import Vesela.Druzina.demo.DB.ucitajOglase;
-//import Vesela.Druzina.demo.izuzeci.KorisnikVecPostoji;
 import Vesela.Druzina.demo.web.KorisnikData;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.security.Principal;
-//import java.security.Principal;
 import java.sql.SQLException;
 
 import javax.validation.Valid;
@@ -24,30 +14,36 @@ import javax.validation.Valid;
 @Controller
 public class RegistracioniKontroler {
     
+    ImeOglasa im;
     DB baza = new DB();
-/*
-    @GetMapping("/")
-    public String index()
-    {
-        System.out.println("home page");
-        return "indexNeregistrovan";
-    }
-*/
-/*
-    @GetMapping("/indexNeregistrovan")
-    public String index1() 
-    {
-        System.out.println("neregistrovan");
-        return "indexNeregistrovan";
-    }  
 
-   */
+
+
     @GetMapping("/") //ovako nesto se salju podaci da bi se koristili u html-u
     public String index1(Model model) throws SQLException
     {
-        model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        //model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        model.addAttribute("oglasiDostupni", baza.pretragaOglasa(im));
         model.addAttribute("poslodavciDostupni", baza.ucitajPoslodavce());
+        im=null;
         return "indexNeregistrovan";
+    }
+
+    @PostMapping("/pretraga")
+    public String pretraga(ImeOglasa imeOglasa)
+    {
+        System.out.println("Usao u pretragu oglasa");
+        try
+        {
+            baza.pretragaOglasa(imeOglasa);
+            im = imeOglasa;
+        } 
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return "redirect:/";
     }  
 
     @GetMapping("/indexKorisnik")
