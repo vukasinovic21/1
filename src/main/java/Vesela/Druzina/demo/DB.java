@@ -32,6 +32,7 @@ import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
         ne prikazivati tabele ako su prazne
         da admin nema "napravi adminom"
         da ne pise ID Korisnika nego Username korisnika u tabeli sa oglasima
+        da pise ko je ulogovan
 */
 public class DB {
     private Connection konekcija = null;
@@ -325,27 +326,28 @@ public class DB {
                             z = 0;
                             System.out.println("Z = "+ z);
                         }
+                        System.out.println("Drugi for");
                     }
-                } 
+                    System.out.println("izasao iz drugog fora");
+                }
+                System.out.println("prvi for"); 
             }
+            System.out.println("izaso iz prvog fora");
  
             for(int i = 0; i < listaOglasa.size(); i++){
 
-                stmt.executeQuery("DELETE FROM `oglas` WHERE `idkorisnika` = " + korisnik.getId());
-                listaOglasa = ucitajOglase();
-                i = 0;
+                if(listaOglasa.get(i).getIdkorisnika() == korisnik.getId()){
+                    stmt.executeQuery("DELETE FROM `oglas` WHERE `idkorisnika` = " + korisnik.getId());
+                    listaOglasa = ucitajOglase();
+                    i = 0;
+                }
             }
         }
 
-       for(int i = 0; i < listaKorisnika.size(); i++){
-
-            if(listaKorisnika.get(i).getId() == korisnik.getId()){
-
-                stmt.executeQuery("DELETE FROM `korisnik` WHERE `id` = " + korisnik.getId());
-                listaKorisnika = ucitajKorisnikeIzBaze();
-                break;
-            }
-        } 
+        //brisanje korisnika
+        stmt.executeQuery("DELETE FROM `korisnik` WHERE `id` = " + korisnik.getId());
+        listaKorisnika = ucitajKorisnikeIzBaze();
+        System.out.println("Gotova f-ja"); 
     }
 
     public void napraviAdminom(KorisnikEntity korisnik) throws SQLException{

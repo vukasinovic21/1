@@ -1,7 +1,7 @@
 package Vesela.Druzina.demo.model;
 
 import Vesela.Druzina.demo.DB;
-import Vesela.Druzina.demo.web.KorisnikData;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +19,9 @@ public class RegistracioniKontroler {
 
 
 
-    @GetMapping("/") //ovako nesto se salju podaci da bi se koristili u html-u
+    @GetMapping("/") 
     public String index1(Model model) throws SQLException
     {
-        //model.addAttribute("oglasiDostupni", baza.ucitajOglase());
         model.addAttribute("oglasiDostupni", baza.pretragaOglasa(im));
         model.addAttribute("poslodavciDostupni", baza.ucitajPoslodavce());
         im=null;
@@ -73,10 +72,9 @@ public class RegistracioniKontroler {
     }
 
     @GetMapping("/signup")
-    public String registruj(final Model model)
+    public String registruj()
     {
         System.out.println("reg page");
-        model.addAttribute("korisnikData", new KorisnikData());
         return "signup";
     }
 
@@ -85,18 +83,9 @@ public class RegistracioniKontroler {
     public String registrujSe(final @Valid  KorisnikEntity korisnikEntity, final BindingResult bindingResult, final Model model) throws SQLException{
 
         System.out.println("Usao u kontroler.");
-
-       /* if(bindingResult.hasErrors())
-        {
-            System.out.println("Usao u if");
-            model.addAttribute("registrationForm", korisnikData);
-            return "index";
-        } */
         try {
             int flag;
-           // korisnikService.registrujSe(korisnikEntity);
             flag = baza.dodajKorisnikaUBazu(korisnikEntity);
-            //korisnikService.save(korisnikEntity);
             if(flag == 4){
                 System.out.println("Uspesna registracija");
                 return "redirect:/";
@@ -114,19 +103,10 @@ public class RegistracioniKontroler {
                 return "neuspesnaRegUser";
             }
         }
-      /*  }catch (KorisnikVecPostoji e){
-            System.out.println("Odradio catch");
-            bindingResult.rejectValue("email", "korisnikData.email","Korisnik sa ovom email adresom vec postoji.");
-            model.addAttribute("registrationForm", korisnikEntity);
-            return "index";
-            
-        }*/catch(SQLException e){
+        catch(SQLException e){
 
             System.out.println("CATCH DataIntegrityViolationException");
-            //return "index";
         } 
-        //System.out.println("izasao iz kontrolera");
-        //return "index"; //vraca na pocetnu stranicu
         return "index";
         
     }
@@ -135,12 +115,9 @@ public class RegistracioniKontroler {
     public String ulogujSe(final Model model)
     {
         System.out.println("log page");
-        model.addAttribute("korisnikData", new KorisnikData());
         return "login";
     }
 
-    //korisnik ne postoji
-    //sifra nije dobra
     @PostMapping("/ulogujSe")
     public String ulogujSe(KorisnikEntity korisnikEntity) throws SQLException{
         System.out.println("Usao u login");
@@ -149,13 +126,13 @@ public class RegistracioniKontroler {
 
         if(flag == 1){ //nepostojeci username
             System.out.println("Ne postoji taj username");
-            return "neuspesnaRegMail";
+            return "neuspesanLogin";
         }
 
         if(flag == 2){ //losa sifra
 
             System.out.println("Netacna sifra");
-            return "neuspesnaRegMail";
+            return "neuspesanLogin";
         }
 
         if(flag == 3){
@@ -173,13 +150,6 @@ public class RegistracioniKontroler {
         System.out.println("Izlazim iz logina");
         return "indexNeregistrovan";
     }
-
-  /*  @GetMapping("/indexPoslodavac")
-    public String indexP()
-    {
-        System.out.println("indexPoslodavac");
-        return "indexPoslodavac";
-    } */
 
     @GetMapping("/novOglas")
     public String novOglas()
@@ -206,10 +176,6 @@ public class RegistracioniKontroler {
     
     @PostMapping("/apliciraj")
     public String apliciraj(Oglas oglas){
-        /*
-            poslati na mejl CV i prijavu
-            ubaciti u bazu
-        */
         System.out.println("Usao u apliciraj");
        
         try {
