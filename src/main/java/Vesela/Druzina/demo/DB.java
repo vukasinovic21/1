@@ -31,6 +31,7 @@ import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
         logout u bekendu odraditi URADJENO
         ne prikazivati tabele ako su prazne
         da admin nema "napravi adminom"
+        da ne pise ID Korisnika nego Username korisnika u tabeli sa oglasima
 */
 public class DB {
     private Connection konekcija = null;
