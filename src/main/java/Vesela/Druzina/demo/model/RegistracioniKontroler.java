@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.sql.SQLException;
 
 import javax.validation.Valid;
@@ -42,14 +44,20 @@ public class RegistracioniKontroler {
             e.printStackTrace();
         }
 
-        return "redirect:/#Oglasi";
-    }  
+        int n = baza.jelPrijavljen();
+        if(n == 2)
+            return "redirect:/indexAdmin";
+        if(n == 3)
+            return "redirect:/indexKorisnik";
+        return "redirect:/";
+    }
 
     @GetMapping("/indexKorisnik")
     public String indexK(Model model) throws SQLException
     {   
-        model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        model.addAttribute("oglasiDostupni", baza.pretragaOglasa(im));
         model.addAttribute("poslodavciDostupni", baza.ucitajPoslodavce());
+        im = null;
         System.out.println("indexKorisnik");
         return "indexKorisnik";
     }
@@ -65,8 +73,9 @@ public class RegistracioniKontroler {
     @GetMapping("/indexAdmin")
     public String indexA(Model model) throws SQLException
     {   
-        model.addAttribute("oglasiDostupni", baza.ucitajOglase());
+        model.addAttribute("oglasiDostupni", baza.pretragaOglasa(im));
         model.addAttribute("korisnikDostupno", baza.ucitajKorisnikeIzBaze());
+        im = null;
         System.out.println("indexAdmin");
         return "indexAdmin";
     }
@@ -119,7 +128,7 @@ public class RegistracioniKontroler {
     }
 
     @PostMapping("/ulogujSe")
-    public String ulogujSe(KorisnikEntity korisnikEntity) throws SQLException{
+    public String ulogujSe(KorisnikEntity korisnikEntity, Model model) throws SQLException{
         System.out.println("Usao u login");
 
         int flag = baza.ulogujKorisnika(korisnikEntity);
@@ -140,6 +149,8 @@ public class RegistracioniKontroler {
         }
 
         if(flag == 4){
+            //ModelAndView model = new ModelAndView("indexKorisnik");
+            model.addAttribute("ulogovanKorisnik", baza.getUlogovanKorisnik());
             return "redirect:/indexKorisnik"; 
         }
             
@@ -175,7 +186,7 @@ public class RegistracioniKontroler {
 
     
     @PostMapping("/apliciraj")
-    public String apliciraj(Oglas oglas){
+    public String apliciraj(CeoOglas oglas){
         System.out.println("Usao u apliciraj");
        
         try {
@@ -189,7 +200,7 @@ public class RegistracioniKontroler {
     }
     
     @PostMapping("/obrisiOglas")
-    public String obrisiOglas(Oglas oglas){
+    public String obrisiOglas(CeoOglas oglas){
         System.out.println("Usao u obrisi");
        
         try {
@@ -230,5 +241,36 @@ public class RegistracioniKontroler {
         }
 
         return "redirect:/indexAdmin";
+    }
+
+    @GetMapping("/promenaProfila")
+    public String promenaProfila(){
+
+        return "promenaProfila";
+    }
+
+    @PostMapping("/promeniProfil")
+    public String promeniProfil(KorisnikEntity noviPodaci){
+
+        System.out.println("Stigao u post mapping");
+        try {
+            baza.promeniPodatke(noviPodaci);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        KorisnikEntity ulogovaniKorisnik = baza.getUlogovanKorisnik();
+
+        if(ulogovaniKorisnik.getAdmin() == 1)
+            return "redirect:/indexAdmin";
+
+        if(ulogovaniKorisnik.getPoslodavac() == 0)
+            return "redirect:/indexKorisnik";
+
+        if(ulogovaniKorisnik.getPoslodavac() == 1)
+            return "redirect:/indexPoslodavac";
+
+        return "redirect:/indexNeregistrovan"; //prebaciti redirect na korisnika/poslod/admina
     }
 }

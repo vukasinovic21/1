@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Registracija</title>
+    <title>Promena profila</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -16,33 +16,30 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/registrujSe}" th:object="${KorisnikEntity}" method="post">
+<form action="#" th:action="@{/promeniProfil}" th:object="${KorisnikEntity}" method="post">
 <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
                 <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                <h2 class="text-black mb-5">Registruj se da bi mogao da konkurišeš za posao!</h2>
+                <h2 class="text-black mb-5">Ovde možete promeniti Vaše podatke.</h2>
+                <h3 class="text-black mb-5">Polja koja ne menjate ostavite praznim.</h3>
                     <div class="container">
-                        <h1>Registracija</h1>
-                        <p>Molimo Vas popunite formu kako bi se uspešno registrovali.</p>
                         <hr>
                         <label for="email"><b>Email</b></label>
-                        <input type="text" placeholder="Unesi Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Karakteri posle kojih mora da se nadje @ znak posle kojeg mora jos karaktera pa . pa jos 2 slova.\n Primer ispravne: ime123@gmail.com" required>
+                        <input type="text" placeholder="Unesi Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Karakteri posle kojih mora da se nadje @ znak posle kojeg mora jos karaktera pa . pa jos 2 slova.\n Primer ispravne: ime123@gmail.com">
                 
-                        <label for="username"><b>Korisničko ime</b></label>
-                        <input type="text" placeholder="Unesi Korisnicko Ime" name="username" pattern="(?=.*\d)(?=.*[A-z]).{6,}" title="Mora imati 6 karaktera u kombinaciji slova i brojeva" required>
-                        
                         <label for="password"><b>Šifra</b></label>
-                        <input type="password" placeholder="Unesi Sifru" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Mora sadrzati veliko slovo, malo slovo, broj i ukupno najmanje 8 karaktera" required>
+                        <input type="password" placeholder="Unesi Sifru" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Mora sadrzati veliko slovo, malo slovo, broj i ukupno najmanje 8 karaktera">
                 
                         <label for="ime"><b>Ime</b></label>
-                        <input type="text" placeholder="Unesi ime" name="ime" required>
+                        <input type="text" placeholder="Unesi ime" name="ime">
 
                         <label for="prezime"><b>Prezime</b></label>
-                        <input type="text" placeholder="Unesi Prezime" name="prezime" required>
+                        <input type="text" placeholder="Unesi Prezime" name="prezime">
                         
                         <label class="levo" for="mestoid"><b>Mesto</b></label><br>
-                        <select name="mestoid" id="mestoid">
+                        <select type="text" name="mestoIdString" id="mestoid">
+                            <option value=""></option>
                             <option value="1">Kragujevac</option>
                             <option value="2">Beograd</option>
                             <option value="3">Novi Sad</option>
@@ -51,13 +48,10 @@
                         </select><br><br>
 
                         <label class="levo" for="broj"><b>Broj Telefona</b></label>
-                        <input class="levo" type="number" placeholder="Unesi Broj" name="mobilni" required>
-                        
-                        <label class="levo" for="tip"><b>Tip Registracije</b></label>
-                        <input class="levo" type="number" placeholder="Uneti 0 za korisnika, 1 za poslodavca" name="poslodavac" required>
+                        <input class="levo" type="text" placeholder="Unesi Broj" name="mobilniString">
 
                         <label for="o sebi"><b>O sebi</b></label>
-                        <input type="text" placeholder="O sebi" name="osebi" required>
+                        <input type="text" placeholder="O sebi" name="osebi">
                 
                         <div class="clearfix">
                         <button id="myButton" class="cancelbtn">Otkaži</button>
@@ -68,7 +62,7 @@
                                 location.href = "/";
                             };
                         </script>
-                        <button type="submit" class="signupbtn">Registruj se</button>
+                        <button type="submit" class="signupbtn">Napravi izmene</button>
                         </div>
                     </div>
             </div>

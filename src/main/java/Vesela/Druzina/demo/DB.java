@@ -5,12 +5,14 @@ import Vesela.Druzina.demo.model.KorisnikNaOglasu;
 import Vesela.Druzina.demo.model.Oglas;
 import Vesela.Druzina.demo.model.OglasHTML;
 import Vesela.Druzina.demo.model.Prijava;
+import Vesela.Druzina.demo.model.CeoOglas;
 import Vesela.Druzina.demo.model.ImeOglasa;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /*
     TO DO:
@@ -177,6 +179,14 @@ public class DB {
         return 1; // ne postoji taj username
     }
 
+    public KorisnikEntity getUlogovanKorisnik(){
+
+        if(prijavljenKorisnik != null)
+            return prijavljenKorisnik;
+        
+        return null;
+    }
+
     public void dodajOglas(OglasHTML oglasHTML) throws SQLException {
 
         System.out.println("USAO U DODAJOGLAS U DB");
@@ -250,12 +260,12 @@ public class DB {
         return listaPrijava;
     }
 
-    public void dodajPrijavu(Oglas oglas) throws SQLException {
+    public void dodajPrijavu(CeoOglas oglas) throws SQLException {
 
         String sql;
 
         sql = "INSERT INTO `prijave`(`IDKorisnika`, `IDOglasa`, `OpisPrijave`) " + "VALUES ('"
-                + prijavljenKorisnik.getId() + "', " + "'" + oglas.getIdoglasa() + "', " + "'" + oglas.getOpis() + "')";
+                + prijavljenKorisnik.getId() + "', " + "'" + oglas.getIdOglasa() + "', " + "'" + oglas.getOpis() + "')";
 
         dodajUBazu(sql);
 
@@ -264,13 +274,13 @@ public class DB {
         System.out.println("Uspesno dodao prijavu u bazu");
     }
 
-    public void obrisiOglas(Oglas oglas) throws SQLException{
+    public void obrisiOglas(CeoOglas oglas) throws SQLException{
 
         for(int i = 0; i < listaOglasa.size(); i++){
 
-            if(listaOglasa.get(i).getIdoglasa() == oglas.getIdoglasa()){
+            if(listaOglasa.get(i).getIdoglasa() == oglas.getIdOglasa()){
 
-                stmt.executeQuery("DELETE FROM `oglas` WHERE `IDOglasa` = " + oglas.getIdoglasa());
+                stmt.executeQuery("DELETE FROM `oglas` WHERE `IDOglasa` = " + oglas.getIdOglasa());
                 listaOglasa.remove(i);
                 break;
             }
@@ -278,9 +288,9 @@ public class DB {
 
         for(int i = 0; i < listaPrijava.size(); i++){
 
-            if(listaPrijava.get(i).getIdoglasa() == oglas.getIdoglasa()){
+            if(listaPrijava.get(i).getIdoglasa() == oglas.getIdOglasa()){
 
-                stmt.executeQuery("DELETE FROM `prijave` WHERE `IDOglasa` = " + oglas.getIdoglasa());
+                stmt.executeQuery("DELETE FROM `prijave` WHERE `IDOglasa` = " + oglas.getIdOglasa());
                 listaPrijava = ucitajPrijave();
                 i = 0;
             }
@@ -360,7 +370,7 @@ public class DB {
             }
         }
 
-        stmt.executeQuery("UPDATE `korisnik` SET `admin` =" + 1 + " WHERE `id` = " + korisnik.getId());        
+        stmt.executeQuery("UPDATE `korisnik` SET `admin` = " + 1 + " WHERE `id` = " + korisnik.getId());        
     }
 
     public ArrayList<KorisnikNaOglasu> nizKorisnikaNaOglasu() throws SQLException{
@@ -413,23 +423,54 @@ public class DB {
         return listaKorisnikaNaOglasu; 
     }
 
-    public ArrayList<Oglas> pretragaOglasa(ImeOglasa imeOglasa) throws SQLException{
+    public ArrayList<CeoOglas> pretragaOglasa(ImeOglasa imeOglasa) throws SQLException{
         listaOglasa = ucitajOglase();
-        ArrayList<Oglas> novalista = new ArrayList<Oglas>();
+        listaKorisnika = ucitajKorisnikeIzBaze();
+        ArrayList<CeoOglas> novalista = new ArrayList<CeoOglas>();
         for (int i = 0; i < listaOglasa.size(); i++)
         {
             if(imeOglasa == null)
             {
                 if((((listaOglasa.get(i).getNaziv()).toLowerCase()).contains("") == true))
                 {
-                    novalista.add(listaOglasa.get(i));
+                    CeoOglas co = new CeoOglas();
+                    co.setEmailKorisnika(listaOglasa.get(i).getEmailKorisnika());
+                    co.setNaziv(listaOglasa.get(i).getNaziv());
+                    co.setOpis(listaOglasa.get(i).getOpis());
+                    co.setPlata(listaOglasa.get(i).getPlata());
+                    co.setIdKorisnika(listaOglasa.get(i).getIdkorisnika());
+                    co.setIdOglasa(listaOglasa.get(i).getIdoglasa());
+                    for(int j = 0; j < listaKorisnika.size(); j++)
+                    {
+                        if(listaKorisnika.get(j).getId() == listaOglasa.get(i).getIdkorisnika())
+                        {
+                            co.setPoslodavac(listaKorisnika.get(j).getUsername());
+                            break;
+                        }            
+                    }
+                    novalista.add(co);
                 }
             }
             else
             {
                 if((((listaOglasa.get(i).getNaziv()).toLowerCase()).contains(imeOglasa.getNaziv().toLowerCase())) == true)
                 {
-                    novalista.add(listaOglasa.get(i));
+                    CeoOglas co = new CeoOglas();
+                    co.setEmailKorisnika(listaOglasa.get(i).getEmailKorisnika());
+                    co.setNaziv(listaOglasa.get(i).getNaziv());
+                    co.setOpis(listaOglasa.get(i).getOpis());
+                    co.setPlata(listaOglasa.get(i).getPlata());
+                    co.setIdKorisnika(listaOglasa.get(i).getIdkorisnika());
+                    co.setIdOglasa(listaOglasa.get(i).getIdoglasa());
+                    for(int j = 0; j < listaKorisnika.size(); j++)
+                    {
+                        if(listaKorisnika.get(j).getId() == listaOglasa.get(i).getIdkorisnika())
+                        {
+                            co.setPoslodavac(listaKorisnika.get(j).getUsername());
+                            break;
+                        }            
+                    }
+                    novalista.add(co);
                 }
             }
         }
@@ -438,5 +479,59 @@ public class DB {
         for(int j = 0; j < novalista.size(); j++)
             System.out.println(novalista.get(j).getNaziv());
         return novalista;
+    }
+
+    public void promeniPodatke(KorisnikEntity noviPodaci) throws SQLException{
+
+        //naci korisnika koji se menja (po usernejmu) i apdejtovati ga u sql i u bekendu
+        System.out.println("STIGAO DOVDE");
+        System.out.println(prijavljenKorisnik.getEmail());
+        if(!noviPodaci.getEmail().isEmpty())
+            prijavljenKorisnik.setEmail(noviPodaci.getEmail());
+        if(!noviPodaci.getPassword().isEmpty())
+            prijavljenKorisnik.setPassword(noviPodaci.getPassword());
+        if(!noviPodaci.getIme().isEmpty())
+            prijavljenKorisnik.setIme(noviPodaci.getIme());
+        if(!noviPodaci.getPrezime().isEmpty())
+            prijavljenKorisnik.setPrezime(noviPodaci.getPrezime());
+        if(!noviPodaci.getMestoIdString().isEmpty())
+            prijavljenKorisnik.setMestoid(Integer.parseInt(noviPodaci.getMestoIdString()));
+        if(!noviPodaci.getMobilniString().isEmpty())
+            prijavljenKorisnik.setMobilni(Integer.parseInt(noviPodaci.getMobilniString()));
+        if(!noviPodaci.getOsebi().isEmpty())
+            prijavljenKorisnik.setOsebi(noviPodaci.getOsebi());
+        
+        System.out.println(prijavljenKorisnik.getEmail()+" GAS");
+
+        String sql = "UPDATE `korisnik` SET `ime` = ?, `prezime` = ?, `email` = ?, `mestoID` = ?, `mobilni` = ?, `oSebi` = ? WHERE `id` = "
+            + prijavljenKorisnik.getId();
+
+        PreparedStatement ps = konekcija.prepareStatement(sql);
+        ps.setString(1, prijavljenKorisnik.getIme());
+        ps.setString(2, prijavljenKorisnik.getPrezime());
+        ps.setString(3, prijavljenKorisnik.getEmail());
+        ps.setInt(4, prijavljenKorisnik.getMestoid());
+        ps.setInt(5, prijavljenKorisnik.getMobilni());
+        ps.setString(6, prijavljenKorisnik.getOsebi());
+
+        ps.executeUpdate();
+
+        listaKorisnika = ucitajKorisnikeIzBaze();
+    }
+
+    public int jelPrijavljen()
+    {
+        if(prijavljenKorisnik == null)
+        {
+            return 1; //indexNeregistrovan
+        }
+        else
+        {
+            if(prijavljenKorisnik.getAdmin() == 1)
+                return 2; //indexAdmin
+            else
+                return 3; //indexKorisnik
+
+        }
     }
 }

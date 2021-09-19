@@ -217,6 +217,13 @@ button:hover {
   background-color: #f44336;
 }
 
+#mestoid
+{
+  width:200px;
+  height:40px;
+  background-color:#F5F5F5;
+  text-align: center;
+}
 
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {

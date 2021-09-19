@@ -20,6 +20,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="#page-top">Početna strana</a>
+                <a class="navbar-brand" href="/promenaProfila">Profil</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -55,7 +56,7 @@
                         <table width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                            <!--- <th>IdKorisnika</th> -->   
+                                <th>Korisničko ime</th>   
                                 <th>Naziv</th>
                                 <th>Plata</th>
                                 <th>Opis</th>
@@ -66,15 +67,15 @@
                                 
                                 <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
                                     <tr>                             
-                                    <!---    <td th:text="${Oglas.idkorisnika}"></td> --> 
+                                        <td th:text="${Oglas.poslodavac}"></td>
                                         <td th:text="${Oglas.naziv}"></td>
                                         <td th:text="${Oglas.plata}"></td>
                                         <td th:text="${Oglas.opis}"></td>
                                         
                                         <td>
                                             <form action="#" th:action="@{/apliciraj}" th:object="${Oglas}" method="post">
-                                                <input type="hidden" th:value="*{idoglasa}" th:name="idoglasa"> 
-                                                <input type="hidden" th:value="*{idkorisnika}" th:name="idkorisnika"> 
+                                                <input type="hidden" th:value="*{idOglasa}" th:name="idOglasa"> 
+                                                <input type="hidden" th:value="*{idKorisnika}" th:name="idKorisnika"> 
                                                 <button type="submit" class="btn btn-primary">Apliciraj</button>
                                                 
                                              </form> 
@@ -113,6 +114,7 @@
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Mobilni</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -123,9 +125,7 @@
                                             <td th:text="${Poslodavac.username}"></td>
                                             <td th:text="${Poslodavac.email}"></td>
                                             <td th:text="${Poslodavac.mobilni}"></td>
-                                            <td>
-                                                <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
-                                            </td>
+                                            <td><a th:href="'mailto:' + ${Poslodavac.email}">Pitaj me!</a></td>
                                         </tr>
                                     </div>
                                 </tbody>
