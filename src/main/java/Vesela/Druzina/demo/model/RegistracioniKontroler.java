@@ -195,9 +195,9 @@ public class RegistracioniKontroler {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        } 
         
-        return "redirect:/indexKorisnik";
+        return "redirect:/indexKorisnik#Oglasi";
     }
     
     @PostMapping("/obrisiOglas")

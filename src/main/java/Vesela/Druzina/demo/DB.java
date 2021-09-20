@@ -25,16 +25,12 @@ import org.springframework.web.bind.annotation.GetMapping;
         dodati da moze da se korisnik ucini adminom (tabela sa korisnicima i dugme da ga napravi adminom, menja u bekendu i u bazi) URADJENO
 
         da moze admin da brise korisnike (+ i oglase) URADJENO
-        MESTO U REG da pise slovima
+        MESTO U REG da pise slovima URADJENO
         dodati dugme za prijavu URADJENO
         napraviti da poslodavac moze da brise svoj oglas 
         REGEX za mail URADJENO
-        Slika za radnika 
         logout u bekendu odraditi URADJENO
-        ne prikazivati tabele ako su prazne
-        da admin nema "napravi adminom"
-        da ne pise ID Korisnika nego Username korisnika u tabeli sa oglasima
-        da pise ko je ulogovan
+        da ne pise ID Korisnika nego Username korisnika u tabeli sa oglasima URADJENO
 */
 public class DB {
     private Connection konekcija = null;
