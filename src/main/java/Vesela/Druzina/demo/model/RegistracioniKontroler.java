@@ -245,8 +245,9 @@ public class RegistracioniKontroler {
     }
 
     @GetMapping("/promenaProfila")
-    public String promenaProfila(){
+    public String promenaProfila(Model model){
 
+        model.addAttribute("prijavljenKorisnik", baza.getUlogovanKorisnik());
         return "promenaProfila";
     }
 
