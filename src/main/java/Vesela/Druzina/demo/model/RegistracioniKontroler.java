@@ -47,10 +47,10 @@ public class RegistracioniKontroler {
 
         int n = baza.jelPrijavljen();
         if(n == 2)
-            return "redirect:/indexAdmin";
+            return "redirect:/indexAdmin#Oglasi";
         if(n == 3)
-            return "redirect:/indexKorisnik";
-        return "redirect:/";
+            return "redirect:/indexKorisnik#Oglasi";
+        return "redirect:/#Oglasi";
     }
 
     @GetMapping("/indexKorisnik")
