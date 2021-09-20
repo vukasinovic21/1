@@ -54,40 +54,34 @@
         </header>
         <!-- About-->
         <section class="about-section text-center" id="Oglasi">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2 class="text-white mb-4">Dostupni oglasi</h2>
-                        <p class="text-white-50">
-                        </p>
-                        <table width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Korisničko ime</th>
-                                <th>Kategorija</th>
-                                <th>Naziv</th>
-                                <th>Plata</th>
-                                <th>Opis posla</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
-                                    <tr>
-                                        <td th:text="${Oglas.poslodavac}"></td>
-                                        <td th:text="${Oglas.kategorija}"></td>
-                                        <td th:text="${Oglas.naziv}"></td>
-                                        <td th:text="${Oglas.plata}"></td>
-                                        <td th:text="${Oglas.opis}"></td>
-                                        <td>
-                                            <!--<a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>-->
-                                        </td>
-                                    </tr>
-                                </div>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="text-white mb-4">Dostupni oglasi</h2>
+                    <p class="text-white-50">
+                    </p>
+                    <table width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Korisničko ime</th>
+                            <th>Kategorija</th>
+                            <th>Naziv</th>
+                            <th>Plata</th>
+                            <th>Opis posla</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
+                                <tr>
+                                    <td th:text="${Oglas.poslodavac}"></td>
+                                    <td th:text="${Oglas.kategorija}"></td>
+                                    <td th:text="${Oglas.naziv}"></td>
+                                    <td th:text="${Oglas.plata}"></td>
+                                    <td th:text="${Oglas.opis}"></td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table> <br>
                 </div>
-            <!--   <img class="img-fluid" src="assets/img/slika2.jpg" alt="..." /> --> 
             </div>
         </section>
         <!-- Projects-->
@@ -95,7 +89,6 @@
             <div class="container px-4 px-lg-5">
                 <!-- Featured Project Row-->
                 <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                <!--    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div> -->
                         <div class="featured-text text-center text-lg-left">
                             <h2 class="text-black-50">Poslodavci</h2>
                             <table width="100%" cellspacing="0">

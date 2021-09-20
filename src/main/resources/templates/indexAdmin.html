@@ -40,56 +40,56 @@
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Projekat</h1>
-                        <!-- OVDE IDE PRETRAGA-->
+                        <form action="#" th:action="@{/pretraga}" th:object="${ImeOglasa}" method="post">
+
+                            <label class="text-white mb50" for="naziv"><b>Pretraga oglasa</b></label>
+                            <input type="text" placeholder="Pretraga" name="naziv">
+
+                            <button type="submit" class="btn btn-primary">Pretraži</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </header>
         <!-- About-->
         <section class="about-section text-center" id="Oglasi">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2 class="text-white mb-4">Dostupni oglasi</h2>
-                        <p class="text-white-50">
-                        <table width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Korisničko ime</th>
-                                <th>Naziv</th>
-                                <th>Plata</th>
-                                <th>Opis</th>
-                                <th>Prijavi se za posao</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                
-                                <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
-                                    <tr>                             
-                                        <td th:text="${Oglas.poslodavac}"></td>
-                                        <td th:text="${Oglas.naziv}"></td>
-                                        <td th:text="${Oglas.plata}"></td>
-                                        <td th:text="${Oglas.opis}"></td>
-                                        
-                                        <td>
-                                            <form action="#" th:action="@{/obrisiOglas}" th:object="${Oglas}" method="post">
-                                                <input type="hidden" th:value="*{idOglasa}" th:name="idOglasa">  
-                                                <button type="submit" class="btn btn-primary">Obriši oglas</button>
-                                             </form> 
-                                             
-                                         </td>
-
-                                    <!--    <td>
-                                            <a th:href="@{student_predmeti/izaberi/__${predmet.sifraPredmeta}__}" class="btn btn-success"><i class="fas fa-check fa-fw"></i>Izaberi</a>
-                                        </td> -->
-                                    </tr> 
-                                </div>
-                                
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="text-white mb-4">Dostupni oglasi</h2>
+                    <p class="text-white-50">
+                    <table width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Korisničko ime</th>
+                            <th>Kategorija</th>
+                            <th>Naziv</th>
+                            <th>Plata</th>
+                            <th>Opis</th>
+                            <th>Prijavi se za posao</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
+                                <tr>                             
+                                    <td th:text="${Oglas.poslodavac}"></td>
+                                    <td th:text="${Oglas.kategorija}"></td>
+                                    <td th:text="${Oglas.naziv}"></td>
+                                    <td th:text="${Oglas.plata}"></td>
+                                    <td th:text="${Oglas.opis}"></td>
+                                    
+                                    <td>
+                                        <form action="#" th:action="@{/obrisiOglas}" th:object="${Oglas}" method="post">
+                                            <input type="hidden" th:value="*{idOglasa}" th:name="idOglasa">  
+                                            <button type="submit" class="btn btn-primary">Obriši oglas</button>
+                                            </form> 
+                                            
+                                    </td>
+                                </tr> 
+                            </div>
+                        </tbody>
+                    </table> <br>
                 </div>
-
             </div>
         </section>
         <!-- Projects-->

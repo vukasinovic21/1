@@ -87,7 +87,7 @@ table
 }
 
 th, td {
-  text-align: left;
+  text-align: center;
   padding: 30px 0;
   padding-left: 10px;
 }
@@ -3192,6 +3192,7 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #64a19d;
   border-color: #64a19d;
+  width: 6cm;
 }
 .btn-primary:hover {
   color: #fff;
