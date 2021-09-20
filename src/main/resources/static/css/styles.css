@@ -79,6 +79,17 @@
   }
 }
 
+#centrisi{
+  margin: auto;
+  width: 50%;
+  padding-top: 150px;
+  text-align: center;
+}
+
+#centrisi button{
+  margin-left: 240px;
+}
+
 table
 {
     color: #64a19d;
