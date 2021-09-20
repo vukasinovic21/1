@@ -64,6 +64,7 @@
                             <thead>
                             <tr>
                                 <th>Korisničko ime</th>
+                                <th>Kategorija</th>
                                 <th>Naziv</th>
                                 <th>Plata</th>
                                 <th>Opis posla</th>
@@ -73,6 +74,7 @@
                                 <div th:each="Oglas : ${oglasiDostupni}" > <!--ovo se dodaje, tj ovako se poziva onaj mapping ili sta vec nisam jos ukapirao nazalost..-->
                                     <tr>
                                         <td th:text="${Oglas.poslodavac}"></td>
+                                        <td th:text="${Oglas.kategorija}"></td>
                                         <td th:text="${Oglas.naziv}"></td>
                                         <td th:text="${Oglas.plata}"></td>
                                         <td th:text="${Oglas.opis}"></td>

@@ -18,4 +18,4 @@ public class ImeOglasa
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
-}
+} 

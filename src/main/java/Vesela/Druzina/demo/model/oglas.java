@@ -13,6 +13,7 @@ public class Oglas
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idoglasa;
     private int idkorisnika;
+    private String kategorija;
     private String emailKorisnika;
 
     public String getEmailKorisnika() {
@@ -30,7 +31,15 @@ public class Oglas
     public Oglas(){
     }
 
-    public Oglas(int idoglasa, int idkorisnika, String emailKorisnika, String naziv, int plata, String opis)
+    public String getKategorija() {
+        return this.kategorija;
+    }
+
+    public void setKategorija(String kategorija) {
+        this.kategorija = kategorija;
+    }
+
+    public Oglas(int idoglasa, int idkorisnika, String emailKorisnika, String kategoija, String naziv, int plata, String opis)
     {
         this.idoglasa = idoglasa;
         this.idkorisnika = idkorisnika;
@@ -38,6 +47,7 @@ public class Oglas
         this.naziv = naziv;
         this.plata = plata;
         this.opis = opis;
+        this.kategorija = kategoija;
     }
 
 

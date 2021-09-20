@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
@@ -272,5 +273,13 @@ public class RegistracioniKontroler {
             return "redirect:/indexPoslodavac";
 
         return "redirect:/indexNeregistrovan"; //prebaciti redirect na korisnika/poslod/admina
+    }
+
+    @RequestMapping("/izloguj")
+    public String izloguj(){
+        System.out.println("IZLOGUJ POST MAPPING");
+        baza.izlogujKorisnika();
+
+        return("redirect:/");
     }
 }

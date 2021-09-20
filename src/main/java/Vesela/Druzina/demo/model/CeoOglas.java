@@ -8,6 +8,7 @@ public class CeoOglas {
     private String naziv;
     private int plata;
     private String opis;
+    private String kategorija;
     private String emailKorisnika;
 
     public CeoOglas(String poslodavac, int idOglasa, int idKorisnika, String naziv, int plata, String opis, String emailKorisnika) {
@@ -18,6 +19,14 @@ public class CeoOglas {
         this.plata = plata;
         this.opis = opis;
         this.emailKorisnika = emailKorisnika;
+    }
+
+    public String getKategorija() {
+        return this.kategorija;
+    }
+
+    public void setKategorija(String kategorija) {
+        this.kategorija = kategorija;
     }
 
 

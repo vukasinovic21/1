@@ -5,6 +5,15 @@ public class OglasHTML {
     private String naziv;
     private int plata;
     private String opis;
+    private String kategorija;
+
+    public String getKategorija() {
+        return this.kategorija;
+    }
+
+    public void setKategorija(String kategorija) {
+        this.kategorija = kategorija;
+    }
 
 
     public OglasHTML(String naziv, int plata, String opis) {

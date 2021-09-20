@@ -71,7 +71,7 @@ public class DB {
             System.out.println("\nCitam Oglase:");
             listaOglasa = ucitajOglase();
             for (int i = 0; i < listaOglasa.size(); i++)
-                System.out.println(listaOglasa.get(i).getNaziv());
+                System.out.println(listaOglasa.get(i).getKategorija());
             System.out.println("Procitao sve oglase.\n");
 
             
@@ -195,7 +195,7 @@ public class DB {
         oglas.setIdkorisnika(prijavljenKorisnik.getId());
 
 
-        sql = "INSERT INTO `oglas`(`IDKorisnika`, `EmailKorisnika`, `Naziv`, `Plata`, `Opis`) " + "VALUES ('" + prijavljenKorisnik.getId() + "', "+" '" + prijavljenKorisnik.getEmail() + "', "+" '" + oglasHTML.getNaziv() + "', "+" '" + oglasHTML.getPlata() + "', " + "'"
+        sql = "INSERT INTO `oglas`(`IDKorisnika`, `EmailKorisnika`, `Kategorija`, `Naziv`, `Plata`, `Opis`) " + "VALUES ('" + prijavljenKorisnik.getId() + "', "+" '" + prijavljenKorisnik.getEmail() + "', "+" '" + oglasHTML.getKategorija() + "', "+" '" + oglasHTML.getNaziv() + "', "+" '" + oglasHTML.getPlata() + "', " + "'"
                 + oglasHTML.getOpis() + "')";
 
         dodajUBazu(sql);
@@ -241,8 +241,7 @@ public class DB {
         rst = stmt.executeQuery(sql);
         ArrayList<Oglas> listaOglasa = new ArrayList<>();
         while (rst.next()) {
-            Oglas og = new Oglas(rst.getInt("idoglasa"), rst.getInt("idkorisnika"), rst.getString("emailKorisnika"), rst.getString("naziv"),
-                    rst.getInt("plata"), rst.getString("opis"));
+            Oglas og = new Oglas(rst.getInt("idoglasa"), rst.getInt("idkorisnika"), rst.getString("emailKorisnika"), rst.getString("kategorija"), rst.getString("naziv"), rst.getInt("plata"), rst.getString("opis"));
             listaOglasa.add(og);
         } 
         return listaOglasa;
@@ -435,6 +434,7 @@ public class DB {
                 {
                     CeoOglas co = new CeoOglas();
                     co.setEmailKorisnika(listaOglasa.get(i).getEmailKorisnika());
+                    co.setKategorija(listaOglasa.get(i).getKategorija());
                     co.setNaziv(listaOglasa.get(i).getNaziv());
                     co.setOpis(listaOglasa.get(i).getOpis());
                     co.setPlata(listaOglasa.get(i).getPlata());
@@ -457,6 +457,7 @@ public class DB {
                 {
                     CeoOglas co = new CeoOglas();
                     co.setEmailKorisnika(listaOglasa.get(i).getEmailKorisnika());
+                    co.setKategorija(listaOglasa.get(i).getKategorija());
                     co.setNaziv(listaOglasa.get(i).getNaziv());
                     co.setOpis(listaOglasa.get(i).getOpis());
                     co.setPlata(listaOglasa.get(i).getPlata());
@@ -533,5 +534,10 @@ public class DB {
                 return 3; //indexKorisnik
 
         }
+    }
+
+    public void izlogujKorisnika(){
+        System.out.println("IZLOGOVAO SAM GA");
+        prijavljenKorisnik = null;
     }
 }
