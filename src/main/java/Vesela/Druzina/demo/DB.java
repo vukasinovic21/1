@@ -11,9 +11,6 @@ import Vesela.Druzina.demo.model.ImeOglasa;
 import java.sql.*;
 import java.util.ArrayList;
 
-import org.hibernate.boot.model.source.spi.SingularAttributeSourceToOne;
-import org.springframework.web.bind.annotation.GetMapping;
-
 /*
     TO DO:
 
